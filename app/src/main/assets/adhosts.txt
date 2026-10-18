@@ -1,0 +1,70 @@
+# Hosts whose requests the WebView refuses (suffix match: "adnxs.com" also blocks "ib.adnxs.com").
+# One per line; "#" starts a comment. An entry with a path (host/path) blocks that prefix only;
+# "*/path" blocks that path prefix on any host except fragrantica.com. Collected from what fragrantica.com actually loads.
+# Never list fragrantica.com, fimgs.net (images) or algolia.net / algolianet.com (search).
+
+# Freestar ad stack and header bidding
+pub.network
+fsrv.io
+durationmedia.net
+primis.tech
+floors.dev
+rapidedge.io
+ad-delivery.net
+html-load.cc
+cheftoondiligord.site
+config-factory.com
+site-config.com
+webcontentassessor.com
+content-settings.com
+
+# Ad-shield (ad recovery / anti-adblock): wraps the page's DOM calls and polls its servers
+butcornyyet.com
+neverveto.com
+cdn.jsdelivr.net/gh/ad-shield
+rawcdn.githack.com/ad-shield
+# Its domains rotate; the script path (base64 of www.fragrantica.com) doesn't.
+*/script/d3d3lmzyywdyyw50awnhlmnvbq
+
+# Google ads
+doubleclick.net
+googlesyndication.com
+googletagservices.com
+googleadservices.com
+adservice.google.com
+
+# Exchanges / bidders
+amazon-adsystem.com
+adnxs.com
+pubmatic.com
+openx.net
+criteo.com
+criteo.net
+indexww.com
+casalemedia.com
+rubiconproject.com
+media.net
+smartadserver.com
+sharethrough.com
+3lift.com
+yieldmo.com
+undertone.com
+adsrvr.org
+ingage.tech
+t13.io
+fastclick.net
+taboola.com
+outbrain.com
+
+# ID sync / tracking
+id5-sync.com
+a-mx.com
+hadronid.net
+hadron.ad.gt
+rlcdn.com
+intentiq.com
+crwdcntrl.net
+privacymanager.io
+analytics.google.com
+google-analytics.com
+googletagmanager.com

@@ -1,0 +1,440 @@
+/*
+ * Vitrine skin for fragrantica.com — "Night Vitrine".
+ * Injected at document start by MainActivity (no flash of the stock page).
+ * html.vitrine         → every fragrantica.com page
+ * html.vitrine-search  → /search/ only (set by bridge.js before first paint)
+ * html.hf-hidden       → while the page is only the hidden data source
+ * Selectors drift; patch them here.
+ */
+
+@font-face {
+  font-family: "Vitrine Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: block;
+  src: url("/__vitrine/fonts/instrument_serif_italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Vitrine Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("/__vitrine/fonts/geist.ttf") format("truetype");
+}
+
+html.vitrine {
+  --v-ground: #0E1311;
+  --v-surface: #1A1A1A;
+  --v-hairline: #333333;
+  --v-chip: #666666;
+  --v-text: #F6F7F2;
+  --v-text-2: #B3B3B3;
+  --v-text-3: #8C8C8C;
+  --v-selected: #DFDBCA;
+  --v-primary: #CFA53B;
+  color-scheme: dark;
+  background: var(--v-ground) !important;
+}
+
+/* ---------- Search page ---------- */
+
+html.vitrine-search body {
+  background: var(--v-ground) !important;
+  background-image: none !important;
+  color: var(--v-text) !important;
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+  /* room for the native "Filter & sort" button */
+  padding-bottom: 96px !important;
+}
+
+/* Site chrome replaced by native UI */
+html.vitrine-search #app > header,
+html.vitrine-search #app > div.lg\:hidden,
+html.vitrine-search #app > div.hidden,
+html.vitrine-search #mobile-menu,
+html.vitrine-search #app > div.max-w-7xl,
+html.vitrine-search #app > footer,
+html.vitrine-search #app > button.fixed,
+html.vitrine-search aside,
+html.vitrine-search main.container > div.grid > div:not(:first-child),
+html.vitrine-search main.col-span-12 > div:first-child:not(.ais-InfiniteHits) {
+  display: none !important;
+}
+
+/* Results header ("Results" + List/Grid toggles); Grid is forced by bridge.js */
+html.vitrine-search .ais-StateResults > div > div:first-child:has(button[aria-label="Grid view"]) {
+  display: none !important;
+}
+
+/* Let the results column use the full width */
+html.vitrine-search main.container,
+html.vitrine-search main.container > div.grid,
+html.vitrine-search main.container > div.grid > div:first-child,
+html.vitrine-search .ais-InstantSearch,
+html.vitrine-search .ais-InstantSearch > div,
+html.vitrine-search main.col-span-12 {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  grid-column: 1 / -1 !important;
+}
+
+html.vitrine-search .ais-InfiniteHits,
+html.vitrine-search .ais-StateResults,
+html.vitrine-search .ais-StateResults > div {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Results: 2-column grid */
+html.vitrine-search .ais-InfiniteHits div.grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  padding: 12px 16px !important;
+}
+
+html.vitrine-search a.prefumeHbox {
+  background: var(--v-surface) !important;
+  border: 1px solid var(--v-hairline) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+html.vitrine-search a.prefumeHbox::before,
+html.vitrine-search a.prefumeHbox::after {
+  display: none !important;
+}
+html.vitrine-search a.prefumeHbox:active {
+  border-color: var(--v-chip) !important;
+}
+
+html.vitrine-search a.prefumeHbox > div:first-child {
+  padding: 12px !important;
+}
+html.vitrine-search a.prefumeHbox picture img {
+  border-radius: 2px;
+}
+html.vitrine-search a.prefumeHbox > div:last-child {
+  padding: 0 12px 12px !important;
+}
+
+/* Perfume name */
+html.vitrine-search a.prefumeHbox h3 {
+  font-family: "Vitrine Serif", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 20px !important;
+  line-height: 1.1 !important;
+  color: var(--v-text) !important;
+  letter-spacing: 0 !important;
+}
+/* Brand */
+html.vitrine-search a.prefumeHbox h3 + p {
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--v-text-2) !important;
+  margin-top: 4px !important;
+}
+/* Year · votes row */
+html.vitrine-search a.prefumeHbox > div:last-child > div:last-child {
+  border-top: 1px solid var(--v-hairline) !important;
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+}
+html.vitrine-search a.prefumeHbox > div:last-child > div:last-child,
+html.vitrine-search a.prefumeHbox > div:last-child > div:last-child * {
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+  font-size: 12px !important;
+  color: var(--v-text-3) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Infinite-scroll sentinel / loaders inherit the dark ground */
+html.vitrine-search .ais-InfiniteHits button {
+  background: var(--v-surface) !important;
+  color: var(--v-text) !important;
+  border: 1px solid var(--v-chip) !important;
+  border-radius: 4px !important;
+  min-height: 48px !important;
+}
+
+/* ---------- Ad slots (requests are blocked natively via adhosts.txt; this hides the empty boxes) ---------- */
+html.vitrine #fs-sticky-footer,
+html.vitrine .fs-sticky-popup-container,
+html.vitrine .freeStarFragrantica,
+html.vitrine [id^="fragranticacom_"],
+html.vitrine #primisPlayerContainerDiv,
+html.vitrine [id^="google_ads_iframe"],
+html.vitrine iframe[id^="_fs-ad"],
+html.vitrine .adsbygoogle {
+  display: none !important;
+}
+
+/* ---------- Perfume detail page (html.vitrine-perfume) ---------- */
+/* The site uses Tailwind; dark: utility classes are matched by substring so
+   the skin survives most markup shuffles. Accord bar colours are inline styles
+   and intentionally kept: they carry meaning. */
+
+html.vitrine-perfume body {
+  background: var(--v-ground) !important;
+  background-image: none !important;
+  color: var(--v-text) !important;
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+  padding-bottom: 32px !important;
+}
+
+/* Site chrome → native top bar */
+html.vitrine-perfume #app > header,
+html.vitrine-perfume #app > div.lg\:hidden,
+html.vitrine-perfume #app > div:has(#super-search),
+html.vitrine-perfume #mobile-menu,
+html.vitrine-perfume #app > div.max-w-7xl,
+html.vitrine-perfume #app > footer,
+html.vitrine-perfume #app > button.fixed,
+html.vitrine-perfume main.container > div.grid > div:not(:first-child),
+html.vitrine-perfume #toptop > div.absolute,
+html.vitrine-perfume #lang-seo-links {
+  display: none !important;
+}
+/* Sponsored shopping widget ("Many items for sale on …  Sponsored") */
+html.vitrine-perfume main #toptop ~ div:has(> [id*="ebay" i]),
+html.vitrine-perfume main #toptop + div + div.mb-4 {
+  display: none !important;
+}
+
+html.vitrine-perfume main.container,
+html.vitrine-perfume main.container > div.grid,
+html.vitrine-perfume main.container > div.grid > div:first-child {
+  display: block !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html.vitrine-perfume main.container > div.grid > div:first-child > div {
+  padding: 8px 16px !important;
+}
+
+/* Surfaces */
+html.vitrine-perfume main [class*="dark:bg-zinc-9"],
+html.vitrine-perfume main [class*="dark:bg-black"] {
+  background: transparent !important;
+  background-image: none !important;
+}
+html.vitrine-perfume main [class*="dark:bg-zinc-8"],
+html.vitrine-perfume main [class*="dark:bg-zinc-7"],
+html.vitrine-perfume main [class*="dark:from-zinc-8"],
+html.vitrine-perfume main [class*="dark:from-zinc-7"] {
+  background: var(--v-surface) !important;
+  background-image: none !important;
+}
+html.vitrine-perfume main [class*="rounded"]:not([class*="rounded-full"]) {
+  border-radius: 4px !important;
+}
+html.vitrine-perfume main [class*="shadow"] {
+  box-shadow: none !important;
+}
+html.vitrine-perfume main [class*="dark:border-zinc"],
+html.vitrine-perfume main [class*="dark:divide-zinc"] > * {
+  border-color: var(--v-hairline) !important;
+}
+
+/* Type */
+html.vitrine-perfume main [class*="dark:text-zinc-50"],
+html.vitrine-perfume main [class*="dark:text-zinc-100"],
+html.vitrine-perfume main [class*="dark:text-zinc-200"],
+html.vitrine-perfume main [class*="dark:text-white"] {
+  color: var(--v-text) !important;
+}
+html.vitrine-perfume main [class*="dark:text-zinc-300"],
+html.vitrine-perfume main [class*="dark:text-zinc-400"] {
+  color: var(--v-text-2) !important;
+}
+html.vitrine-perfume main [class*="dark:text-zinc-500"],
+html.vitrine-perfume main [class*="dark:text-zinc-600"] {
+  color: var(--v-text-3) !important;
+}
+html.vitrine-perfume main a[class*="dark:text-blue"],
+html.vitrine-perfume main a[class*="dark:text-sky"],
+html.vitrine-perfume main a[class*="dark:text-teal"],
+html.vitrine-perfume main [class*="dark:text-blue"] a {
+  color: var(--v-selected) !important;
+}
+html.vitrine-perfume main h2,
+html.vitrine-perfume main h3 {
+  font-family: "Vitrine Serif", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--v-text) !important;
+}
+
+/* Title block */
+html.vitrine-perfume #toptop {
+  margin: 8px 0 16px !important;
+}
+html.vitrine-perfume #toptop h1 {
+  font-family: "Vitrine Serif", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 36px !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  color: var(--v-text) !important;
+}
+html.vitrine-perfume #toptop h1 > span {
+  display: block !important;
+  margin-top: 10px !important;
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+  font-style: normal !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--v-text-2) !important;
+}
+
+/* Hero: bottle + brand + accords */
+html.vitrine-perfume #toptop + div picture,
+html.vitrine-perfume #toptop + div picture img {
+  border-radius: 4px !important;
+}
+html.vitrine-perfume [itemprop="brand"] [itemprop="name"] {
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--v-text-2) !important;
+}
+html.vitrine-perfume [itemprop="brand"] img {
+  border-radius: 2px !important;
+}
+html.vitrine-perfume main h6 {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--v-text-3) !important;
+}
+/* Accord bars: keep the site's colours, square them off */
+html.vitrine-perfume #toptop + div [class*="rounded-br"] {
+  border-radius: 0 4px 4px 0 !important;
+  margin-bottom: 3px !important;
+  font-family: "Vitrine Sans", system-ui, sans-serif !important;
+}
+
+/* Note pyramid */
+html.vitrine-perfume #pyramid h4 span {
+  background: var(--v-surface) !important;
+  color: var(--v-text-3) !important;
+  letter-spacing: 0.12em !important;
+}
+html.vitrine-perfume #pyramid a {
+  color: var(--v-text) !important;
+}
+
+/* Buttons and pills */
+html.vitrine-perfume main button {
+  border-radius: 4px !important;
+  min-height: 40px;
+}
+/* Site component cards (tw-rating-card, tw-carousel-news-card, …) */
+html.vitrine-perfume main .tw-rating-card,
+html.vitrine-perfume main .tw-carousel-news-card,
+html.vitrine-perfume main .tw-carousel-perfume-card,
+html.vitrine-perfume main .tw-perf-card,
+html.vitrine-perfume main .tw-review-card {
+  border-radius: 4px !important;
+  background: var(--v-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--v-hairline) !important;
+  box-shadow: none !important;
+}
+
+/* Shopping/affiliate widgets ("Where to buy", eBay) are iframes from c.fimgs.net */
+html.vitrine-perfume main div:has(> div > iframe[id^="idIframe"]),
+html.vitrine-perfume main iframe[src*="c.fimgs.net"] {
+  display: none !important;
+}
+
+/* Site accent (teal/sky) → Night Vitrine accent */
+html.vitrine-perfume main [class*="dark:text-teal"],
+html.vitrine-perfume main [class*="dark:text-sky"],
+html.vitrine-perfume main [class*="dark:text-emerald"] {
+  color: var(--v-selected) !important;
+}
+html.vitrine-perfume main [class*="dark:bg-teal"],
+html.vitrine-perfume main [class*="dark:bg-sky"],
+html.vitrine-perfume main [class*="dark:bg-emerald"] {
+  background: var(--v-surface) !important;
+  border: 1px solid var(--v-chip) !important;
+}
+
+/* Longevity / sillage / vote bars: the site's teal is an inline style */
+html.vitrine-perfume main [style*="rgb(13, 148, 136)"],
+html.vitrine-perfume main [style*="rgb(20, 184, 166)"],
+html.vitrine-perfume main [style*="#0d9488" i],
+html.vitrine-perfume main [style*="#14b8a6" i] {
+  background-color: var(--v-primary) !important;
+}
+html.vitrine-perfume main .vue-slider-process,
+html.vitrine-perfume main .vue-slider-dot-handle {
+  background-color: var(--v-primary) !important;
+  border-color: var(--v-primary) !important;
+}
+html.vitrine-perfume main .vue-slider-rail {
+  background-color: var(--v-hairline) !important;
+  border-radius: 4px !important;
+}
+
+/* Site's "Join our community" sign-up popup: blocks taps and clashes with native UI.
+   When it opens, the site also sets body.style.overflow = 'hidden' to lock
+   scrolling behind it; since the popup is hidden, undo that lock too. */
+html.vitrine #registration-nudge-overlay {
+  display: none !important;
+}
+html.vitrine body {
+  overflow: visible !important;
+}
+html.vitrine-perfume main .tw-carousel-scroll-btn {
+  display: none !important;
+}
+
+/* Remaining teal buttons ("Suggest", "Find more recommendations") */
+html.vitrine-perfume main a[class*="bg-teal"],
+html.vitrine-perfume main button[class*="bg-teal"],
+html.vitrine-perfume main a[class*="from-teal"],
+html.vitrine-perfume main button[class*="from-teal"],
+html.vitrine-perfume main [class*="dark:bg-teal"] {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--v-chip) !important;
+  color: var(--v-text) !important;
+}
+html.vitrine-perfume main [class*="bg-teal"]:not(.w-1),
+html.vitrine-perfume main [class*="from-teal"]:not(.w-1) {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--v-chip) !important;
+  color: var(--v-text) !important;
+}
+
+/* Nobody sees the hidden page: a looping animation there only makes the app
+   redraw at full frame rate. Back on in Open on Fragrantica. */
+html.hf-hidden *, html.hf-hidden *::before, html.hf-hidden *::after {
+  animation: none !important;
+  transition: none !important;
+}
