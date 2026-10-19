@@ -32,6 +32,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.MoreVert
@@ -93,7 +96,7 @@ fun DetailScreen(site: SiteController, d: Detail) {
             item(key = "hero") {
                 Box {
                     Hero(d)
-                    TopButtons(site)
+                    TopButtons(site, d)
                 }
             }
             item(key = "title") { TitleBlock(d) }
@@ -140,7 +143,7 @@ private fun Hero(d: Detail) {
 }
 
 @Composable
-private fun TopButtons(site: SiteController) {
+private fun TopButtons(site: SiteController, d: Detail) {
     var menu by remember { mutableStateOf(false) }
     Row(
         Modifier
@@ -152,6 +155,18 @@ private fun TopButtons(site: SiteController) {
             Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null, tint = V.Text, modifier = Modifier.size(20.dp))
         }
         Spacer(Modifier.weight(1f))
+        val saved = site.favorites.contains(d.url)
+        RoundButton(
+            onClick = { site.favorites.toggle(d) },
+            description = "Save",
+            state = if (saved) "Saved" else "Not saved",
+        ) {
+            Icon(
+                if (saved) Icons.Default.Favorite else Icons.Default.FavoriteBorder, null,
+                tint = if (saved) V.Heart else V.Text,
+                modifier = Modifier.size(19.dp),
+            )
+        }
         Box {
             RoundButton(onClick = { menu = true }, description = "More options") {
                 Icon(Icons.Default.MoreVert, null, tint = V.Text, modifier = Modifier.size(18.dp))
@@ -162,12 +177,16 @@ private fun TopButtons(site: SiteController) {
 }
 
 @Composable
-private fun RoundButton(onClick: () -> Unit, description: String, content: @Composable () -> Unit) {
+private fun RoundButton(onClick: () -> Unit, description: String, state: String? = null, content: @Composable () -> Unit) {
     Box(
         Modifier
             .size(48.dp)
             .clickable(onClick = onClick)
-            .semantics { role = Role.Button; contentDescription = description },
+            .semantics {
+                role = Role.Button
+                contentDescription = description
+                if (state != null) stateDescription = state
+            },
         contentAlignment = Alignment.Center,
     ) {
         Box(

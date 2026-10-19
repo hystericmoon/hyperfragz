@@ -46,6 +46,16 @@ data class Detail(
             return "$article $noun$who" + (year?.let { ", launched in $it." } ?: ".")
         }
 
+    /** Sections every perfume page normally has, but that came up empty here. */
+    fun missingSections(): List<String> = listOfNotNull(
+        "rating".takeIf { rating == null },
+        "accords".takeIf { accords == null },
+        "notes".takeIf { notes == null },
+        "on skin".takeIf { longevity == null && sillage == null },
+        "best worn".takeIf { wear == null },
+        "reviews".takeIf { reviews?.items.isNullOrEmpty() },
+    )
+
     /** This snapshot, with [old]'s values filling in anything this one lacks. */
     fun mergedOver(old: Detail) = copy(
         name = name.ifEmpty { old.name },

@@ -21,6 +21,25 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Fragrantica perfume and search links. The site can't verify this
+                 app, so on Android 12+ the user turns these on under Open by default. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="www.fragrantica.com" />
+                <data android:host="fragrantica.com" />
+                <data android:pathPrefix="/perfume/" />
+                <data android:pathPrefix="/search" />
+            </intent-filter>
+            <!-- Share → HyperFragz with a Fragrantica link in the text. -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
 
         <provider

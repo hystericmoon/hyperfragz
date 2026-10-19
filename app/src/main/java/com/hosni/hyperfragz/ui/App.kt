@@ -42,8 +42,11 @@ import com.hosni.hyperfragz.SiteController
 @Composable
 fun App(site: SiteController) {
     var refine by rememberSaveable { mutableStateOf(false) }
+    var saved by rememberSaveable { mutableStateOf(false) }
     val snack = remember { SnackbarHostState() }
 
+    // Registered first so the one below (detail / web) takes precedence.
+    BackHandler(enabled = saved && site.stack.isEmpty() && !site.showWeb) { saved = false }
     BackHandler(enabled = site.showWeb || site.stack.isNotEmpty()) { site.back() }
     LaunchedEffect(site.message) {
         val m = site.message ?: return@LaunchedEffect
@@ -72,9 +75,12 @@ fun App(site: SiteController) {
 
         if (!site.showWeb) {
             val top = site.stack.lastOrNull()
-            if (top == null) IndexScreen(site, onOpenFilters = { refine = true })
-            else DetailScreen(site, top)
-            if (refine && top == null) RefineSheet(site, onDismiss = { refine = false })
+            when {
+                top != null -> DetailScreen(site, top)
+                saved -> SavedScreen(site, onBack = { saved = false })
+                else -> IndexScreen(site, onOpenFilters = { refine = true }, onOpenSaved = { saved = true })
+            }
+            if (refine && top == null && !saved) RefineSheet(site, onDismiss = { refine = false })
         }
 
         SnackbarHost(

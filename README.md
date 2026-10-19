@@ -34,6 +34,8 @@ Search 140,000+ perfumes, filter by notes, gender, family and designer, and read
 - **Search everything.** The full Fragrantica catalogue, with results as you type.
 - **Real filters.** Gender, notes, scent family, designer, perfumer, year, rating and minimum votes, with live result counts. Remove any filter with one tap.
 - **Readable perfume pages.** Rating breakdown, main accords, the note pyramid ("How it unfolds"), longevity and sillage ("On skin"), community pros and cons, best season and time of day, similar scents and reviews.
+- **Saved perfumes.** Tap the heart on any perfume to keep it in your Saved list, stored on your phone with no account needed.
+- **Opens Fragrantica links.** Share a fragrantica.com link to HyperFragz, or let perfume links open straight in the app.
 - **Fast.** Sections appear as soon as they're ready, usually within 2–3 seconds.
 - **No ads.** Ad and tracker requests are blocked before they load.
 - **Light on your phone.** Uses almost no CPU while idle and rests completely in the background.
@@ -69,6 +71,9 @@ You can also check any time: tap **FRAGRANTICA** at the top right → **Check fo
 | Change the order | Tap the sort label above the results (Most popular, Newest, Top rated…). |
 | Open a perfume | Tap its card. Scroll for notes, performance, opinions, similar scents and reviews. |
 | Sort reviews | In Reviews, open the sort menu: Newest, Most positive, Most negative. |
+| Save a perfume | Tap the ♡ at the top of its page. Your saved perfumes are behind the ♡ next to **FRAGRANTICA** on The Index. |
+| Open links in the app | Share any fragrantica.com perfume link → **HyperFragz**. To have links open in the app automatically: **FRAGRANTICA** → **Open Fragrantica links here** → turn on *Open supported links* and add the links. |
+| Report a problem | **FRAGRANTICA** (or **⋮** on a perfume) → **Report a problem**. It opens a GitHub issue with the app version and page already filled in. |
 | See the original page | Tap **⋮** on a perfume, or **FRAGRANTICA** on The Index → **Open on Fragrantica**. |
 
 ## How it works
@@ -88,6 +93,18 @@ Requires Android Studio (or JDK 17) and the Android SDK.
 ```
 
 The debug build installs as **HyperFragz Debug** next to the release build. Release builds are signed with a key kept outside the repo (`keystore.properties`, ignored by git).
+
+## Publishing a release
+
+1. Raise `versionCode` and `versionName` in `app/build.gradle.kts` and commit.
+2. Tag and push:
+   ```bash
+   git tag -a v1.2.1 -m "What changed, in a few lines"
+   git push origin main v1.2.1
+   ```
+3. The **Release** workflow builds a signed APK and publishes it. The tag message becomes the release notes. Everyone's app shows the Update banner on its next launch.
+
+The workflow signs with the repository secrets `KEYSTORE_BASE64`, `STORE_PASSWORD`, `KEY_ALIAS` and `KEY_PASSWORD`.
 
 ## Disclaimer
 

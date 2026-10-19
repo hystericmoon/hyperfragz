@@ -49,6 +49,8 @@ class SiteController(private val context: Context) {
     var loading by mutableStateOf(true)
         private set
 
+    val favorites = Favorites(context)
+
     /** assets/adhosts.txt; must be loaded before the WebView starts requesting. */
     private val adEntries = asset("adhosts.txt").lineSequence()
         .map { it.substringBefore('#').trim().lowercase() }
@@ -148,6 +150,27 @@ class SiteController(private val context: Context) {
         openedAt = android.os.SystemClock.elapsedRealtime()
         markNav()
         webView.loadUrl(preview.url)
+    }
+
+    /**
+     * A fragrantica.com link from outside the app: perfume pages open on top of
+     * whatever is showing, search links replace the index results.
+     */
+    fun openLink(link: String) {
+        val uri = android.net.Uri.parse(link.trim())
+        val path = uri.path.orEmpty()
+        val url = uri.buildUpon().scheme("https").authority("www.fragrantica.com").fragment(null).build().toString()
+        if (showWeb) closeWeb()
+        when {
+            path.startsWith("/perfume/") ->
+                if (stack.lastOrNull()?.let { samePage(it.url, url) } != true) openDetail(Detail.preview(Hit(url, "", "", null, null, null)))
+            path.startsWith("/search") -> {
+                stack.clear()
+                markNav()
+                webView.loadUrl(url)
+            }
+            else -> message = "HyperFragz opens Fragrantica perfume and search links."
+        }
     }
 
     /** Handles Back; false when there's nothing left to go back to (exit). */
@@ -252,6 +275,7 @@ class SiteController(private val context: Context) {
         // Sections stream in, and the site briefly swaps some out while it
         // re-renders them: keep whatever we already had for anything missing now.
         stack[i] = d.mergedOver(old)
+        favorites.refresh(stack[i])
     }
 
     /** True when there is an earlier *site* page to return to (skips about:blank). */
@@ -420,4 +444,41 @@ class SiteController(private val context: Context) {
     }
 
     fun openHome() = webView.loadUrl(HOME_URL)
+
+    /** Android 12+: where the user lets fragrantica.com links open in HyperFragz. */
+    val canSetLinks = android.os.Build.VERSION.SDK_INT >= 31
+
+    fun openLinkSettings() {
+        if (!canSetLinks) return
+        runCatching {
+            context.startActivity(
+                Intent(android.provider.Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, android.net.Uri.parse("package:${context.packageName}"))
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        }
+    }
+
+    /** A pre-filled GitHub issue: app and Android version, the page, and which sections came up empty. */
+    fun reportProblem() {
+        val version = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull()
+        val top = stack.lastOrNull()
+        val pageUrl = top?.url ?: state.url
+        val missing = top?.takeIf { it.complete }?.missingSections().orEmpty()
+        val title = if (top != null && top.name.isNotEmpty()) "Problem on ${top.name}" else "Problem in HyperFragz"
+        val body = buildString {
+            appendLine("**What went wrong?**")
+            appendLine()
+            appendLine()
+            appendLine("---")
+            appendLine("- App: HyperFragz $version")
+            appendLine("- Android: ${android.os.Build.VERSION.RELEASE} (${android.os.Build.MODEL})")
+            appendLine("- Page: $pageUrl")
+            if (missing.isNotEmpty()) appendLine("- Empty sections: ${missing.joinToString()}")
+        }
+        val uri = android.net.Uri.parse("https://github.com/hystericmoon/hyperfragz/issues/new").buildUpon()
+            .appendQueryParameter("title", title)
+            .appendQueryParameter("body", body)
+            .build()
+        runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+    }
 }

@@ -77,7 +77,7 @@ import kotlinx.coroutines.delay
 
 /** design/1 · Results and design/3 · No results. */
 @Composable
-fun IndexScreen(site: SiteController, onOpenFilters: () -> Unit) {
+fun IndexScreen(site: SiteController, onOpenFilters: () -> Unit, onOpenSaved: () -> Unit) {
     val state = site.state
     val active = state.activeFilters
     val noResults = state.total == 0 && (active.isNotEmpty() || state.query.isNotEmpty())
@@ -93,7 +93,7 @@ fun IndexScreen(site: SiteController, onOpenFilters: () -> Unit) {
                 .statusBarsPadding()
                 .imePadding()
         ) {
-            IndexHeader(site)
+            IndexHeader(site, onOpenSaved)
             UpdateBanner()
             if (active.isNotEmpty()) AppliedChips(site, active)
             if (!noResults) ResultsRow(site)
@@ -121,7 +121,7 @@ fun IndexScreen(site: SiteController, onOpenFilters: () -> Unit) {
 }
 
 @Composable
-private fun IndexHeader(site: SiteController) {
+private fun IndexHeader(site: SiteController, onOpenSaved: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -131,6 +131,7 @@ private fun IndexHeader(site: SiteController) {
         Text("The Index", style = serif(34), modifier = Modifier
             .weight(1f)
             .semantics { heading() })
+        SavedButton(site.favorites.items.size, onOpenSaved)
         // "FRAGRANTICA" doubles as the overflow menu (Open on Fragrantica).
         var menu by remember { mutableStateOf(false) }
         Box {
@@ -158,6 +159,16 @@ fun SiteMenu(expanded: Boolean, onDismiss: () -> Unit, site: SiteController) {
             modifier = Modifier.heightIn(min = 48.dp),
         )
         UpdateMenuItem(onDismiss) { site.message = it }
+        if (site.canSetLinks && site.stack.isEmpty()) DropdownMenuItem(
+            text = { Text("Open Fragrantica links here", style = sans(15)) },
+            onClick = { onDismiss(); site.openLinkSettings() },
+            modifier = Modifier.heightIn(min = 48.dp),
+        )
+        DropdownMenuItem(
+            text = { Text("Report a problem", style = sans(15)) },
+            onClick = { onDismiss(); site.reportProblem() },
+            modifier = Modifier.heightIn(min = 48.dp),
+        )
     }
 }
 
@@ -352,7 +363,7 @@ private fun ResultsGrid(site: SiteController) {
 }
 
 @Composable
-private fun HitCard(h: Hit, onClick: () -> Unit) {
+fun HitCard(h: Hit, onClick: () -> Unit) {
     Column(
         Modifier
             .clickable(onClick = onClick)

@@ -13,6 +13,8 @@ import com.hosni.hyperfragz.ui.App
 import com.hosni.hyperfragz.ui.LocalUpdater
 import com.hosni.hyperfragz.ui.VitrineTheme
 
+private val LINK = Regex("""https?://(www\.)?fragrantica\.com/\S+""", RegexOption.IGNORE_CASE)
+
 class MainActivity : ComponentActivity() {
 
     private lateinit var site: SiteController
@@ -39,15 +41,23 @@ class MainActivity : ComponentActivity() {
         openFromIntent(intent)
     }
 
-    /** Debug builds only: `am start … --es open <perfume url>` opens that page (for testing). */
+    /** Fragrantica links (tapped or shared) open here; debug builds also take test extras. */
     private fun openFromIntent(intent: Intent?) {
-        if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
-        // Test hook: simulate Android killing the hidden page's process.
-        if (intent?.getBooleanExtra("crashPage", false) == true) { site.webView.loadUrl("chrome://crash"); return }
-        val url = intent?.getStringExtra("open") ?: return
-        if (url.startsWith("https://www.fragrantica.com/perfume/")) {
-            site.openDetail(Detail.preview(Hit(url, "", "", null, null, null)))
+        intent ?: return
+        val link = when (intent.action) {
+            Intent.ACTION_VIEW -> intent.dataString
+            Intent.ACTION_SEND -> intent.getStringExtra(Intent.EXTRA_TEXT)?.let { LINK.find(it)?.value }
+                ?: run { site.message = "That isn't a Fragrantica link."; null }
+            else -> null
         }
+        if (link != null) {
+            site.openLink(link)
+            return
+        }
+        if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
+        // Test hooks: `am start … --es open <perfume url>`; simulate Android killing the page process.
+        if (intent.getBooleanExtra("crashPage", false)) { site.webView.loadUrl("chrome://crash"); return }
+        intent.getStringExtra("open")?.let(site::openLink)
     }
 
     override fun onResume() {
