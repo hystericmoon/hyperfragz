@@ -30,7 +30,7 @@ jobs:
         run: |
           sdkmanager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           yes | "$sdkmanager" --licenses > /dev/null
-          "$sdkmanager" "platforms;android-37" > /dev/null
+          "$sdkmanager" "platforms;android-37.0" > /dev/null
 
       - name: Check the tag matches versionName
         run: |
