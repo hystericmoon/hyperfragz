@@ -20,8 +20,8 @@ android {
         applicationId = "com.hosni.hyperfragz"
         minSdk = 26
         targetSdk = 37
-        versionCode = 9
-        versionName = "1.2.0"
+        versionCode = 10
+        versionName = "1.2.1"
     }
 
     signingConfigs {

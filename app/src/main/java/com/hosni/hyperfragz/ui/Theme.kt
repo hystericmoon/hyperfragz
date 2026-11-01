@@ -38,7 +38,9 @@ object V {
     val Raised = Color(0xFF151A18)         // "How it unfolds" band
     val Track = Color(0xFF262A28)          // empty part of bars
     val Olive = Color(0xFF6B6345)          // non-leading bar segments
-    val Dim = Color(0xFF353937)            // minor bar segments
+    // Data-bar ramp, gold → olive. Every step is ≥ 3:1 on Ground and on Track (WCAG 1.4.11).
+    val Ramp = listOf(Color(0xFFCFA53B), Color(0xFFAE8F3E), Color(0xFF8C7942), Color(0xFF7C6E43), Color(0xFF6B6345))
+    val BarMid = Color(0xFF8C7942)         // secondary bar segments / rows
     val Heart = Color(0xFFD9C07C)          // middle notes, between cream and gold
 
     val Radius = RoundedCornerShape(4.dp)

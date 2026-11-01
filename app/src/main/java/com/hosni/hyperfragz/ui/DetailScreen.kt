@@ -238,14 +238,15 @@ private fun RatingBlock(r: com.hosni.hyperfragz.Rating, loading: Boolean) {
             Spacer(Modifier.height(10.dp + 16.dp))
         }
         r.breakdown?.let { b ->
-            val colors = listOf(V.Primary, Color(0xFF9E8340), V.Olive.copy(alpha = 0.85f), V.Dim, Color(0xFF2A2E2C))
+            val total = b.sumOf { it.count }
             SegmentBar(
                 b.map { it.count.toFloat() },
-                b.indices.map { colors.getOrElse(it) { V.Dim } },
+                b.indices.map { V.Ramp.getOrElse(it) { V.Ramp.last() } },
                 Modifier
                     .padding(top = 14.dp)
                     .fillMaxWidth()
-                    .height(5.dp),
+                    .height(5.dp)
+                    .semantics { contentDescription = "Rating split: " + shares(b, total) },
             )
             Row(Modifier.padding(top = 10.dp)) {
                 Text("Love", style = sans(12, V.Text3), modifier = Modifier.weight(1f))
@@ -370,14 +371,15 @@ private fun SkinMeter(title: String, buckets: List<Count>, low: String, high: St
             buckets.map {
                 when {
                     it === winner -> V.Primary
-                    it.count.toFloat() / total >= 0.12f -> V.Olive.copy(alpha = 0.85f)
-                    else -> V.Dim
+                    it.count.toFloat() / total >= 0.12f -> V.BarMid
+                    else -> V.Olive
                 }
             },
             Modifier
                 .padding(top = 10.dp)
                 .fillMaxWidth()
-                .height(28.dp),
+                .height(28.dp)
+                .semantics { contentDescription = "$title: " + shares(buckets, total) },
             gap = 2.dp,
         )
         Row(Modifier.padding(top = 8.dp)) {
@@ -393,6 +395,10 @@ private fun SkinMeter(title: String, buckets: List<Count>, low: String, high: St
         )
     }
 }
+
+/** "love 52%, like 24%, …" — what a segment bar shows, for TalkBack. */
+private fun shares(buckets: List<Count>, total: Int) =
+    buckets.joinToString(", ") { "${it.label.lowercase()} ${pct(it.count, total)}%" }
 
 // ------------------------------------------------------------------ what people say
 
@@ -464,7 +470,7 @@ private fun BestWorn(w: List<Count>) {
                     .semantics(mergeDescendants = true) { contentDescription = "${c.label.capitalised()}, ${fmt(c.count)} votes" },
             ) {
                 Text(c.label.capitalised(), style = sans(14, V.Text, 500), modifier = Modifier.width(76.dp))
-                MeterBar(c.count.toFloat() / max, if (i < 3) V.Primary else V.Olive, Modifier.weight(1f), height = 5.dp)
+                MeterBar(c.count.toFloat() / max, if (i < 3) V.Primary else V.BarMid, Modifier.weight(1f), height = 5.dp)
                 Text(compact(c.count), style = sans(13, V.Text3), modifier = Modifier.width(56.dp), textAlign = androidx.compose.ui.text.style.TextAlign.End)
             }
         }
