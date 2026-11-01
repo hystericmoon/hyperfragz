@@ -517,10 +517,96 @@
     }, 600);
   }
 
+  // ---------------------------------------------------------------- saved pages
+  // Debug builds: "Share page for testing" saves the rendered page so cloud
+  // sessions can run these scripts against it offline (tools/pages/check.cjs).
+  // Saved pages get committed to a public repository, so this removes scripts,
+  // frames and ads, and every trace of members: review authors and text, photo
+  // credits, avatars, profile links and the "recent reviews" widget. Any name
+  // found along the way is then replaced wherever else it appears.
+  var MEMBER_LINK = /\/@|\/member\/|\/fragram\//;
+  var AVATAR = /\/avatari\/|\/himg\//;
+
+  function snapshot(root) {
+    var doc = (root || document.documentElement).cloneNode(true);
+    var names = {};
+    function name(n) {
+      n = (n || '').replace(/\(Fragrantica\.com\)/, '').trim();
+      if (n.length >= 3 && !/^member\d*$/.test(n)) names[n] = 1; // skip names an earlier snapshot already replaced
+    }
+    function all(sel) { return Array.prototype.slice.call(doc.querySelectorAll(sel)); }
+
+    all('script, noscript, iframe, link[rel="preload"], link[rel="prefetch"], link[rel="modulepreload"], #vitrine-skin, ' +
+      '[id^="fragranticacom_"], .freeStarFragrantica, [data-fuse], [data-placement-name], [id^="div-gpt"], ins.adsbygoogle')
+      .forEach(function (el) { el.remove(); });
+
+    // Review cards: keep the structure extract.js reads, replace who and what.
+    all(X.reviewCard).forEach(function (card, c) {
+      var member = 'member' + (c + 1), meta = card.querySelector(X.reviewName);
+      if (meta) { name(meta.getAttribute('content')); meta.setAttribute('content', member); }
+      var prose = card.querySelector(X.reviewProse);
+      if (prose) prose.innerHTML = '<p>Review text removed from this saved page.</p>';
+    });
+    // Member photos and the recent-reviews widget (name + review snippet): not read by the scripts.
+    all('.tw-photo-card').forEach(function (el) {
+      var img = el.querySelector('img[alt^="Photo by"]');
+      if (img) name(img.getAttribute('alt').replace(/^Photo by\s*/, ''));
+      el.remove();
+    });
+    all('[class*="group/tooltip"]').forEach(function (el) {
+      if (!doc.contains(el)) return; // inside an entry already removed
+      var t = el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild.nodeValue : '';
+      name(t);
+      var item = el.closest('a') || el;
+      var avatar = item.querySelector('img[alt]');
+      if (avatar) name(avatar.getAttribute('alt'));
+      item.remove();
+    });
+    // Avatars and profile links anywhere else.
+    all('img, source').forEach(function (el) {
+      var src = (el.getAttribute('src') || '') + ' ' + (el.getAttribute('srcset') || '');
+      if (!AVATAR.test(src)) return;
+      if (el.tagName === 'IMG') name(el.getAttribute('alt'));
+      el.removeAttribute('src'); el.removeAttribute('srcset'); el.setAttribute('alt', '');
+    });
+    all('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!MEMBER_LINK.test(href)) return;
+      var handle = (href.match(/\/@([^/?#]+)/) || [])[1];
+      if (handle) name(decodeURIComponent(handle));
+      if (!a.querySelector('*')) name(a.textContent);
+      a.setAttribute('href', '/member/0');
+    });
+    // Markup hidden inside attributes (e.g. photo captions with a profile link).
+    all('*').forEach(function (el) {
+      for (var i = el.attributes.length - 1; i >= 0; i--) if (/[<>]/.test(el.attributes[i].value)) el.removeAttribute(el.attributes[i].name);
+    });
+    // Any collected name, wherever else it appears (text or attributes).
+    var list = Object.keys(names).sort(function (a, b) { return b.length - a.length; });
+    if (list.length) {
+      var walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT), n;
+      while ((n = walker.nextNode())) n.nodeValue = scrub(n.nodeValue, list);
+      all('*').forEach(function (el) {
+        for (var i = 0; i < el.attributes.length; i++) {
+          var v = el.attributes[i].value, w = scrub(v, list);
+          if (w !== v) el.setAttribute(el.attributes[i].name, w);
+        }
+      });
+    }
+    doc.classList.remove('hf-hidden');
+    var url = (root ? root.ownerDocument : document).location.href.replace(/#.*$/, '');
+    return '<!-- hf-url: ' + url + ' -->\n<!DOCTYPE html>\n' + doc.outerHTML;
+  }
+  function scrub(s, names) {
+    for (var i = 0; i < names.length; i++) if (s.indexOf(names[i]) >= 0) s = s.split(names[i]).join('member');
+    return s;
+  }
+
   window.HyperExtract = {
     hits: hits,
     sortReviews: sortReviews,
-    helpful: helpful
+    helpful: helpful,
+    snapshot: snapshot
   };
 
   // The full HTML (with every review) can take a while to parse, so post a

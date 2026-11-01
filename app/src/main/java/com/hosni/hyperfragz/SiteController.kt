@@ -430,6 +430,38 @@ class SiteController(private val context: Context) {
         loadUrl(url)
     }
 
+    /** Debug builds only: "Share page for testing" in the menus. */
+    val canSharePage get() = debuggable
+
+    /**
+     * Saves the hidden page as HTML (HyperExtract.snapshot strips scripts, ads, member
+     * names and review text) and opens the share sheet, so Hosni can attach it to a
+     * cloud session. Sessions run extract.js and bridge.js against it offline: tools/pages/check.cjs.
+     */
+    fun sharePageForTesting() {
+        webView.evaluateJavascript("window.HyperExtract?HyperExtract.snapshot():null") { result ->
+            val html = runCatching { org.json.JSONTokener(result).nextValue() as? String }.getOrNull()
+            if (html.isNullOrEmpty()) {
+                message = "This page can't be saved yet. Try again once it has loaded."
+                return@evaluateJavascript
+            }
+            val name = (android.net.Uri.parse(webView.url ?: "").lastPathSegment ?: "page")
+                .removeSuffix(".html").lowercase().replace(Regex("[^a-z0-9]+"), "-").trim('-').ifEmpty { "page" }
+            val dir = java.io.File(context.cacheDir, "pages").apply { mkdirs() }
+            dir.listFiles()?.forEach { it.delete() }
+            val file = java.io.File(dir, "$name.html").apply { writeText(html) }
+            val uri = androidx.core.content.FileProvider.getUriForFile(context, "${context.packageName}.updates", file)
+            val send = Intent(Intent.ACTION_SEND)
+                .setType("text/html")
+                .putExtra(Intent.EXTRA_STREAM, uri)
+                .putExtra(Intent.EXTRA_SUBJECT, "HyperFragz saved page: $name")
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            runCatching {
+                context.startActivity(Intent.createChooser(send, "Share page for testing").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            }
+        }
+    }
+
     /** Android 12+: where the user lets fragrantica.com links open in HyperFragz. */
     val canSetLinks = android.os.Build.VERSION.SDK_INT >= 31
 

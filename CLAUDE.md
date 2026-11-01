@@ -79,8 +79,20 @@ try to get around that). What replaces each device check:
   minutes in 429 retries. If `ANDROID_HOME` is unset or the init script is missing, run
   `bash tools/cloud-setup.sh` once. First build in a fresh session: ~2–3 min; rebuilds ~15 s.
 - **UI:** screenshot tests (below). Look at the images yourself and compare with `design/`.
+- **Site scripts (`extract.js`, `bridge.js`):** saved pages (below), never the live site.
 - **On the phone:** push a test build (below); Hosni installs it from the Debug app's banner.
 - **Before a release:** Hosni does the on-device smoke test on a test build of the release commit.
+
+What the cloud session's GitHub access allows (found 2026-11-01):
+- Works: clone, fetch, pushing branches, the REST API through `gh api` (create/update PRs:
+  `gh api repos/hystericmoon/hyperfragz/pulls -f title=… -f head=… -f base=main -F draft=true -F body=@file`).
+- Refused: pushing or creating tags, deleting branches (git and API), and GraphQL, so
+  `gh pr create` / `gh pr view` fail. Hence the branch-based test builds and release-on-merge.
+- The repo is attached with push access via `add_repo` (access "push"); clone to `/home/user/hyperfragz`.
+  A shallow clone fetches only main: run
+  `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'` before working with branches.
+- Large Google Drive files: `download_file_content` saves the result to a JSON file instead of
+  returning it; base64-decode its `content` field with python.
 
 ## Test builds (to Hosni's phone)
 
@@ -113,6 +125,34 @@ Golden images: `app/src/test/screenshots/` (`4-detail-full.png` is one tall imag
   Images are null, so cards show the bottle outline. Sample reviews use made-up names and text.
 - Not covered: the WebView itself, live data, Coil images, real-device fonts/insets.
 
+## Saved pages (`tools/pages/`)
+
+When Fragrantica changes its markup, fix the scripts against saved copies of its pages:
+- Hosni saves one in the Debug app: FRAGRANTICA (or ⋮ on a perfume) → **Share page for testing**,
+  saves it to Google Drive and gives the file name; fetch it with the Google Drive connector
+  (`download_file_content`: the result is written to a JSON file; base64-decode its `content`).
+  GitHub issues don't take .html attachments.
+- `HyperExtract.snapshot()` in extract.js drops scripts, frames and ads and removes members:
+  review authors and text, photo cards, the recent-reviews widget, avatars, profile links
+  (`/@handle`, `/member/`, `/fragram/`), then replaces every name it collected anywhere else.
+- Always run `node tools/pages/clean.cjs <file>` on a new page (re-cleans it with the current
+  snapshot(), in case the phone runs an older build), then grep it for names before committing
+  (public repo). Members' names have turned up in new places before; if you find one, make
+  snapshot() catch it and add the pattern to the privacy check in check.cjs.
+- Put it in `tools/pages/saved/<name>.html` (first line `<!-- hf-url: … -->`, keep it).
+- `node tools/pages/check.cjs` runs extract.js + bridge.js on every saved page in the preinstalled
+  headless Chromium, offline (all other requests blocked), prints which sections came out
+  (✗ = empty, usually a stale selector in `X`/`SEL`) and compares with `<name>.expected.json`.
+  `--update` accepts the current output; a name argument filters pages. It also checks on every
+  run that snapshots leak no names or review text.
+- Workflow: add the broken page, run (✗ shows what broke), fix the selectors, run until the
+  sections are back, `--update`, commit page + expected JSON with the fix.
+- Limits: search pages are saved after rendering, so bridge.js can read hits, counts and panels
+  but not the live Vue/InstantSearch state (applied refinements come out null), and nothing the
+  scripts *do* (filters, sorting, loading more) can be replayed. The search result count is
+  live-only too. `perfume-liquid-brun.html` and `search-male-musk.html` are real pages saved
+  2026-11-01 (all sections extract); `synthetic-perfume.html` is hand-written from the selectors.
+
 ## Testing on a device (`tools/`)
 
 Needs adb access to a phone or emulator, so only from a local session on Hosni's Mac.
@@ -133,3 +173,16 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
 - Ideas not done yet: none queued. Past suggestions were links, favourites, problem reports and
   CI releases — all shipped in 1.2.0.
+
+## Status (2026-11-01)
+
+- Cloud workflow built in PRs #1 (screenshot tests + cloud setup), #2 (test builds +
+  release-on-merge) and #3 (saved pages), merged into main 2026-11-01. The `cloud/*` branches
+  can be deleted on GitHub (sessions can't).
+- Done and verified: cloud builds, screenshot tests (local + CI), test builds test-1…3 published
+  and signed with the release cert, test-branch auto-delete, saved-page checks on two real pages.
+- Hosni's phone runs HyperFragz Debug from test builds (Mac-built Debug app replaced).
+  tools/cloud-setup.sh is the cloud environment's setup script (pasted 2026-11-01). If
+  `ANDROID_HOME` is unset at the start of a session, it didn't run; run it by hand and tell Hosni.
+- Not yet exercised: release-on-merge (needs the next version bump; check the Release run and
+  the published APK's cert after it), and the stricter snapshot() on the phone (test-3).

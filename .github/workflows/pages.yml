@@ -1,0 +1,27 @@
+# On pull requests that touch the page scripts or saved pages: run extract.js and
+# bridge.js against every page in tools/pages/saved/ (offline) and compare with
+# the expected JSON. See "Saved pages" in CLAUDE.md.
+name: Saved pages
+
+on:
+  pull_request:
+    paths:
+      - app/src/main/assets/**
+      - tools/pages/**
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Playwright
+        run: |
+          # Same version as the one preinstalled in cloud sessions.
+          npm install --no-save --no-package-lock playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Check saved pages
+        run: node tools/pages/check.cjs

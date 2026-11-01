@@ -1,0 +1,1211 @@
+{
+  "url": "https://www.fragrantica.com/perfume/French-Avenue/Liquid-Brun-94713.html",
+  "identity": {
+    "name": "Liquid Brun",
+    "brand": "French Avenue",
+    "genderLine": "for men",
+    "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-375x500.94713.2x.webp"
+  },
+  "about": {
+    "family": "Woody",
+    "audience": "men",
+    "year": "2024",
+    "createdBy": null
+  },
+  "perfumers": null,
+  "rating": {
+    "value": 4.42,
+    "votes": 16037,
+    "breakdown": [
+      {
+        "label": "love",
+        "count": 10500
+      },
+      {
+        "label": "like",
+        "count": 3300
+      },
+      {
+        "label": "ok",
+        "count": 1100
+      },
+      {
+        "label": "dislike",
+        "count": 670
+      },
+      {
+        "label": "hate",
+        "count": 451
+      }
+    ]
+  },
+  "accords": [
+    {
+      "label": "sweet",
+      "width": 100
+    },
+    {
+      "label": "warm spicy",
+      "width": 98.8672
+    },
+    {
+      "label": "vanilla",
+      "width": 96.5652
+    },
+    {
+      "label": "cinnamon",
+      "width": 79.5758
+    },
+    {
+      "label": "white floral",
+      "width": 60.9423
+    },
+    {
+      "label": "powdery",
+      "width": 60.677
+    },
+    {
+      "label": "aromatic",
+      "width": 57.6105
+    },
+    {
+      "label": "citrus",
+      "width": 57.4713
+    },
+    {
+      "label": "musky",
+      "width": 56.7404
+    },
+    {
+      "label": "amber",
+      "width": 52.1618
+    }
+  ],
+  "notes": {
+    "top": [
+      "Cinnamon",
+      "Orange Blossom",
+      "Cardamom",
+      "Bergamot"
+    ],
+    "middle": [
+      "Bourbon Vanilla",
+      "elemi"
+    ],
+    "base": [
+      "Praline",
+      "Ambroxan",
+      "Musk",
+      "Guaiac Wood"
+    ]
+  },
+  "longevity": [
+    {
+      "label": "very weak",
+      "count": 102
+    },
+    {
+      "label": "weak",
+      "count": 180
+    },
+    {
+      "label": "moderate",
+      "count": 2000
+    },
+    {
+      "label": "long lasting",
+      "count": 6800
+    },
+    {
+      "label": "eternal",
+      "count": 1300
+    }
+  ],
+  "sillage": [
+    {
+      "label": "intimate",
+      "count": 324
+    },
+    {
+      "label": "moderate",
+      "count": 3200
+    },
+    {
+      "label": "strong",
+      "count": 6000
+    },
+    {
+      "label": "enormous",
+      "count": 722
+    }
+  ],
+  "wear": [
+    {
+      "label": "winter",
+      "count": 12000
+    },
+    {
+      "label": "spring",
+      "count": 2500
+    },
+    {
+      "label": "summer",
+      "count": 897
+    },
+    {
+      "label": "fall",
+      "count": 9600
+    },
+    {
+      "label": "day",
+      "count": 4500
+    },
+    {
+      "label": "night",
+      "count": 9700
+    }
+  ],
+  "prosCons": {
+    "pros": [
+      {
+        "text": "Perfect for cold weather and dates",
+        "agree": 1500,
+        "disagree": 29
+      },
+      {
+        "text": "Exceptional value for the price",
+        "agree": 1400,
+        "disagree": 34
+      },
+      {
+        "text": "98% accurate PDM Althaïr clone",
+        "agree": 1100,
+        "disagree": 56
+      },
+      {
+        "text": "Addictive vanilla and cinnamon gourmand",
+        "agree": 949,
+        "disagree": 37
+      },
+      {
+        "text": "Premium packaging and heavy bottle",
+        "agree": 916,
+        "disagree": 27
+      },
+      {
+        "text": "Balanced unisex profile with masculine lean",
+        "agree": 722,
+        "disagree": 59
+      },
+      {
+        "text": "Strong projection and room-filling sillage",
+        "agree": 716,
+        "disagree": 70
+      },
+      {
+        "text": "Lasts 10+ hours on skin",
+        "agree": 670,
+        "disagree": 104
+      },
+      {
+        "text": "Massive compliment getter in public",
+        "agree": 563,
+        "disagree": 54
+      },
+      {
+        "text": "Indistinguishable from Althaïr in the air",
+        "agree": 488,
+        "disagree": 27
+      },
+      {
+        "text": "Outperforms the original Parfums de Marly",
+        "agree": 418,
+        "disagree": 46
+      }
+    ],
+    "cons": [
+      {
+        "text": "Too sweet and heavy for summer",
+        "agree": 1200,
+        "disagree": 145
+      },
+      {
+        "text": "Overpowering sweetness if oversprayed",
+        "agree": 727,
+        "disagree": 269
+      },
+      {
+        "text": "Potentially cloying in small spaces",
+        "agree": 515,
+        "disagree": 213
+      },
+      {
+        "text": "Requires weeks of maceration for performance",
+        "agree": 484,
+        "disagree": 446
+      },
+      {
+        "text": "Aggressive ambroxan can be nose-stinging",
+        "agree": 239,
+        "disagree": 384
+      },
+      {
+        "text": "Harsh initial alcohol blast",
+        "agree": 254,
+        "disagree": 469
+      },
+      {
+        "text": "Synthetic or medicinal quality up close",
+        "agree": 227,
+        "disagree": 466
+      },
+      {
+        "text": "Batch inconsistencies reported by users",
+        "agree": 128,
+        "disagree": 269
+      },
+      {
+        "text": "Linear scent profile lacks transitions",
+        "agree": 120,
+        "disagree": 383
+      },
+      {
+        "text": "Awkward and unappealing product name",
+        "agree": 121,
+        "disagree": 591
+      },
+      {
+        "text": "Reported notes of burnt rubber or plastic",
+        "agree": 109,
+        "disagree": 589
+      }
+    ],
+    "disclaimer": "These pros and cons are AI-generated from member reviews and may be inaccurate. Please read full reviews and consider your own needs before purchasing."
+  },
+  "similar": [
+    {
+      "url": "https://www.fragrantica.com/perfume/Parfums-de-Marly/Althair-84109.html",
+      "brand": "Parfums de Marly",
+      "name": "Althaïr",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.84109.2x.webp",
+      "yes": 3000,
+      "no": 128
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/French-Avenue/Liquid-Brun-Limited-Edition-123526.html",
+      "brand": "French Avenue",
+      "name": "Liquid Brun Limited Edition",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.123526.2x.webp",
+      "yes": 481,
+      "no": 30
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Art-Of-Nature-II-98242.html",
+      "brand": "Lattafa Perfumes",
+      "name": "Art Of Nature II",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.98242.2x.webp",
+      "yes": 397,
+      "no": 46
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Khadlaj-Perfumes/Island-Vanilla-Dunes-106802.html",
+      "brand": "Khadlaj Perfumes",
+      "name": "Island Vanilla Dunes",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.106802.2x.webp",
+      "yes": 334,
+      "no": 42
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/Historic-Sahara-109081.html",
+      "brand": "Afnan",
+      "name": "Historic Sahara",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.109081.2x.webp",
+      "yes": 175,
+      "no": 28
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Mercedes-Benz/Mercedes-Benz-Club-Black-Eau-de-Toilette-46797.html",
+      "brand": "Mercedes-Benz",
+      "name": "Mercedes Benz Club Black Eau de Toilette",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.46797.2x.webp",
+      "yes": 271,
+      "no": 347
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Armaf/Monarque-98713.html",
+      "brand": "Armaf",
+      "name": "Monarque",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.98713.2x.webp",
+      "yes": 93,
+      "no": 18
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Bath-Body-Works/Vanilla-Romance-96320.html",
+      "brand": "Bath & Body Works",
+      "name": "Vanilla Romance",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.96320.2x.webp",
+      "yes": 101,
+      "no": 34
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Bath-Body-Works/Vanilla-Romance-98137.html",
+      "brand": "Bath & Body Works",
+      "name": "Vanilla Romance",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.98137.2x.webp",
+      "yes": 82,
+      "no": 23
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/PARIS-CORNER/PERSEVIRON-109928.html",
+      "brand": "PARIS CORNER",
+      "name": "PERSEVIRON",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.109928.2x.webp",
+      "yes": 54,
+      "no": 4
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Overdose-134748.html",
+      "brand": "Rasasi",
+      "name": "Hawas Overdose",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.134748.2x.webp",
+      "yes": 45,
+      "no": 2
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Brulee-112321.html",
+      "brand": "Ahmed Al Maghribi",
+      "name": "Brûlée",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.112321.2x.webp",
+      "yes": 48,
+      "no": 9
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Arabian-Oud/Zumorod-91545.html",
+      "brand": "Arabian Oud",
+      "name": "Zumorod",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.91545.2x.webp",
+      "yes": 52,
+      "no": 21
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Ard-Al-Zaafaran/Al-Dirgham-Special-Edition-104408.html",
+      "brand": "Ard Al Zaafaran",
+      "name": "Al Dirgham Special Edition",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.104408.2x.webp",
+      "yes": 43,
+      "no": 8
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Ferrari/Scuderia-Ferrari-Black-25064.html",
+      "brand": "Ferrari",
+      "name": "Scuderia Ferrari Black",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.25064.2x.webp",
+      "yes": 59,
+      "no": 44
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Giorgio-Armani/Emporio-Armani-Stronger-With-You-Intensely-52802.html",
+      "brand": "Giorgio Armani",
+      "name": "Emporio Armani Stronger With You Intensely",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.52802.2x.webp",
+      "yes": 174,
+      "no": 278
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Nuancielo/Domus-129078.html",
+      "brand": "Nuancielo",
+      "name": "Domus",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.129078.2x.webp",
+      "yes": 31,
+      "no": 1
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Samam/Chaos-100172.html",
+      "brand": "Samam",
+      "name": "Chaos",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.100172.2x.webp",
+      "yes": 31,
+      "no": 6
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Manoard/Magnetic-122816.html",
+      "brand": "Manoard",
+      "name": "Magnetic",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.122816.2x.webp",
+      "yes": 30,
+      "no": 5
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/MAISON-ASRAR/Masterpiece-100034.html",
+      "brand": "MAISON ASRAR",
+      "name": "Masterpiece",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-t.100034.2x.webp",
+      "yes": 27,
+      "no": 1
+    }
+  ],
+  "alsoLike": [
+    {
+      "url": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Khamrah-Qahwa-88175.html",
+      "brand": "Lattafa Perfumes",
+      "name": "Khamrah Qahwa",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.88175.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Khamrah-75805.html",
+      "brand": "Lattafa Perfumes",
+      "name": "Khamrah",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.75805.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Giorgio-Armani/Emporio-Armani-Stronger-With-You-Intensely-52802.html",
+      "brand": "Giorgio Armani",
+      "name": "Emporio Armani Stronger With You Intensely",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.52802.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/9pm-65414.html",
+      "brand": "Afnan",
+      "name": "9pm",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.65414.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Viktor-Rolf/Spicebomb-Extreme-30499.html",
+      "brand": "Viktor&Rolf",
+      "name": "Spicebomb Extreme",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.30499.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Xerjoff/XJ-1861-Naxos-30529.html",
+      "brand": "Xerjoff",
+      "name": "XJ 1861 Naxos",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.30529.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Jean-Paul-Gaultier/Le-Male-Le-Parfum-61856.html",
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male Le Parfum",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.61856.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Jean-Paul-Gaultier/Le-Male-Elixir-81642.html",
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male Elixir",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.81642.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Asad-Bourbon-101124.html",
+      "brand": "Lattafa Perfumes",
+      "name": "Asad Bourbon",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.101124.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Asad-72821.html",
+      "brand": "Lattafa Perfumes",
+      "name": "Asad",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.72821.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Jean-Paul-Gaultier/Le-Beau-Le-Parfum-72158.html",
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Beau Le Parfum",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.72158.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Azzaro/The-Most-Wanted-Parfum-73664.html",
+      "brand": "Azzaro",
+      "name": "The Most Wanted Parfum",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.73664.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Versace/Versace-Pour-Homme-Dylan-Blue-40031.html",
+      "brand": "Versace",
+      "name": "Versace Pour Homme Dylan Blue",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.40031.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/Supremacy-Collector-s-Edition-Pour-Homme-98689.html",
+      "brand": "Afnan",
+      "name": "Supremacy Collector's Edition Pour Homme",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.98689.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/MYSLF-Eau-de-Parfum-84094.html",
+      "brand": "Yves Saint Laurent",
+      "name": "MYSLF Eau de Parfum",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.84094.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/Turathi-Blue-70839.html",
+      "brand": "Afnan",
+      "name": "Turathi Blue",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.70839.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Ice-89050.html",
+      "brand": "Rasasi",
+      "name": "Hawas Ice",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.89050.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/French-Avenue/Vulcan-Feu-105520.html",
+      "brand": "French Avenue",
+      "name": "Vulcan Feu",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.105520.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Armaf/Club-de-Nuit-Intense-Man-34696.html",
+      "brand": "Armaf",
+      "name": "Club de Nuit Intense Man",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.34696.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Y-Eau-de-Parfum-50757.html",
+      "brand": "Yves Saint Laurent",
+      "name": "Y Eau de Parfum",
+      "image": "https://fimgs.net/mdimg/perfume-thumbs/dark-s.50757.2x.webp"
+    }
+  ],
+  "reviews": {
+    "total": 1800,
+    "sort": "newest",
+    "items": [
+      {
+        "id": "3263979",
+        "user": "member1",
+        "date": "12 hours ago",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3263620",
+        "user": "member2",
+        "date": "17 hours ago",
+        "verdict": "love",
+        "tags": [
+          "eternal",
+          "strong sillage",
+          "spring, fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3263481",
+        "user": "member3",
+        "date": "20 hours ago",
+        "verdict": "ok",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3263340",
+        "user": "member4",
+        "date": "a day ago",
+        "verdict": "like",
+        "tags": [
+          "moderate longevity",
+          "moderate sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3263014",
+        "user": "member5",
+        "date": "a day ago",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3262858",
+        "user": "member6",
+        "date": "a day ago",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3262840",
+        "user": "member7",
+        "date": "a day ago",
+        "verdict": "love",
+        "tags": [
+          "fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3262724",
+        "user": "member8",
+        "date": "a day ago",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3261202",
+        "user": "member9",
+        "date": "2026-10-29",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3261177",
+        "user": "member10",
+        "date": "2026-10-29",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3261176",
+        "user": "member11",
+        "date": "2026-10-29",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3260948",
+        "user": "member12",
+        "date": "2026-10-29",
+        "verdict": "love",
+        "tags": [
+          "winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3260542",
+        "user": "member13",
+        "date": "2026-10-29",
+        "verdict": "hate",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3260424",
+        "user": "member14",
+        "date": "2026-10-29",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3260318",
+        "user": "member15",
+        "date": "2026-10-29",
+        "verdict": "hate",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3260042",
+        "user": "member16",
+        "date": "2026-10-28",
+        "verdict": "ok",
+        "tags": [
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3259325",
+        "user": "member17",
+        "date": "2026-10-28",
+        "verdict": "love",
+        "tags": [
+          "fall, winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3258903",
+        "user": "member18",
+        "date": "2026-10-28",
+        "verdict": "ok",
+        "tags": [
+          "fall",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3258772",
+        "user": "member19",
+        "date": "2026-10-28",
+        "verdict": "hate",
+        "tags": [
+          "fall, winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3258425",
+        "user": "member20",
+        "date": "2026-10-27",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3257853",
+        "user": "member21",
+        "date": "2026-10-27",
+        "verdict": "like",
+        "tags": [
+          "winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3257503",
+        "user": "member22",
+        "date": "2026-10-27",
+        "verdict": "love",
+        "tags": [
+          "winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3256811",
+        "user": "member23",
+        "date": "2026-10-26",
+        "verdict": "ok",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3256339",
+        "user": "member24",
+        "date": "2026-10-26",
+        "verdict": "love",
+        "tags": [
+          "fall, winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3256254",
+        "user": "member25",
+        "date": "2026-10-26",
+        "verdict": "love",
+        "tags": [
+          "eternal",
+          "enormous sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3255347",
+        "user": "member26",
+        "date": "2026-10-25",
+        "verdict": "ok",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3254708",
+        "user": "member27",
+        "date": "2026-10-24",
+        "verdict": "ok",
+        "tags": [
+          "eternal",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3254288",
+        "user": "member28",
+        "date": "2026-10-24",
+        "verdict": "love",
+        "tags": [
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3254247",
+        "user": "member29",
+        "date": "2026-10-24",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3254083",
+        "user": "member30",
+        "date": "2026-10-24",
+        "verdict": "love",
+        "tags": [
+          "moderate longevity",
+          "moderate sillage"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3253097",
+        "user": "member31",
+        "date": "2026-10-23",
+        "verdict": "ok",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3252421",
+        "user": "member32",
+        "date": "2026-10-23",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3251386",
+        "user": "member33",
+        "date": "2026-10-22",
+        "verdict": "love",
+        "tags": [
+          "eternal",
+          "enormous sillage",
+          "fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3251235",
+        "user": "member34",
+        "date": "2026-10-22",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3251188",
+        "user": "member35",
+        "date": "2026-10-22",
+        "verdict": "hate",
+        "tags": [
+          "winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3251117",
+        "user": "member36",
+        "date": "2026-10-22",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "moderate sillage",
+          "fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3250976",
+        "user": "member37",
+        "date": "2026-10-22",
+        "verdict": "like",
+        "tags": [
+          "eternal",
+          "strong sillage"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3250724",
+        "user": "member38",
+        "date": "2026-10-22",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3250136",
+        "user": "member39",
+        "date": "2026-10-21",
+        "verdict": "ok",
+        "tags": [
+          "fall"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3250092",
+        "user": "member40",
+        "date": "2026-10-21",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3249413",
+        "user": "member41",
+        "date": "2026-10-21",
+        "verdict": "love",
+        "tags": [
+          "eternal",
+          "strong sillage",
+          "winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3249378",
+        "user": "member42",
+        "date": "2026-10-21",
+        "verdict": "love",
+        "tags": [
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3249127",
+        "user": "member43",
+        "date": "2026-10-21",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3248359",
+        "user": "member44",
+        "date": "2026-10-20",
+        "verdict": "hate",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3248340",
+        "user": "member45",
+        "date": "2026-10-20",
+        "verdict": "like",
+        "tags": [
+          "eternal",
+          "enormous sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3247388",
+        "user": "member46",
+        "date": "2026-10-19",
+        "verdict": "hate",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3247376",
+        "user": "member47",
+        "date": "2026-10-19",
+        "verdict": null,
+        "tags": [
+          "winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3247157",
+        "user": "member48",
+        "date": "2026-10-19",
+        "verdict": "like",
+        "tags": [
+          "long lasting",
+          "moderate sillage",
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3247146",
+        "user": "member49",
+        "date": "2026-10-19",
+        "verdict": "like",
+        "tags": [
+          "winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3247082",
+        "user": "member50",
+        "date": "2026-10-19",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3246957",
+        "user": "member51",
+        "date": "2026-10-19",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3246878",
+        "user": "member52",
+        "date": "2026-10-19",
+        "verdict": null,
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3246271",
+        "user": "member53",
+        "date": "2026-10-18",
+        "verdict": null,
+        "tags": [
+          "long lasting",
+          "strong sillage"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3246233",
+        "user": "member54",
+        "date": "2026-10-18",
+        "verdict": "love",
+        "tags": [
+          "fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245985",
+        "user": "member55",
+        "date": "2026-10-18",
+        "verdict": "dislike",
+        "tags": [
+          "fall, winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245963",
+        "user": "member56",
+        "date": "2026-10-18",
+        "verdict": "love",
+        "tags": [
+          "spring, fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245940",
+        "user": "member57",
+        "date": "2026-10-18",
+        "verdict": "ok",
+        "tags": [
+          "eternal",
+          "strong sillage",
+          "fall, winter",
+          "day"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245936",
+        "user": "member58",
+        "date": "2026-10-18",
+        "verdict": "love",
+        "tags": [
+          "long lasting",
+          "strong sillage",
+          "fall, winter",
+          "Day and night"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245792",
+        "user": "member59",
+        "date": "2026-10-18",
+        "verdict": "dislike",
+        "tags": [
+          "fall, winter"
+        ],
+        "text": "Review text removed from this saved page."
+      },
+      {
+        "id": "3245483",
+        "user": "member60",
+        "date": "2026-10-18",
+        "verdict": "love",
+        "tags": [
+          "spring, fall, winter",
+          "night"
+        ],
+        "text": "Review text removed from this saved page."
+      }
+    ]
+  }
+}
