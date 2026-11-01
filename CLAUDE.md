@@ -48,8 +48,8 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
 
 ## Build, run, release
 
-- JDK: Android Studio's JBR (`/Applications/Android Studio.app/Contents/jbr/Contents/Home`) locally;
-  CI uses Temurin 21. Gradle 9.8.1, AGP 9.4.1, Kotlin 2.4.21. SDK platform package is
+- JDK: Android Studio's JBR (`/Applications/Android Studio.app/Contents/jbr/Contents/Home`) on the Mac;
+  cloud sessions have OpenJDK 21; CI uses Temurin 21. Gradle 9.8.1, AGP 9.4.1, Kotlin 2.4.21. SDK platform package is
   `platforms;android-37.0` (not `android-37`).
 - Debug: `./gradlew :app:assembleDebug` → id `com.hosni.hyperfragz.debug`, label "HyperFragz Debug"
   (installs beside the release build). `./run.sh` builds, installs and launches on a device.
@@ -65,10 +65,36 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
   it exists on Hosni's Mac, in Hosni's backup, and as the GitHub secrets above. Never commit it.
   All releases so far share cert SHA-256 `fa727de5…11ccc6`; a different key breaks updates.
 
+## Cloud sessions (the default way to work)
+
+Development happens in Claude Code cloud sessions. There is no phone, no emulator
+(no `/dev/kvm`) and no access to fragrantica.com (it answers cloud IPs with HTTP 429; don't
+try to get around that). What replaces each device check:
+- **Build:** `./gradlew :app:assembleDebug` works as on the Mac. The environment's setup script
+  (copy of `tools/cloud-setup.sh`) installs the Android SDK at `/opt/android-sdk` and a Gradle init
+  script that reads Maven Central through Google's mirror. Without the mirror, builds stall for
+  minutes in 429 retries. If `ANDROID_HOME` is unset or the init script is missing, run
+  `bash tools/cloud-setup.sh` once. First build in a fresh session: ~2–3 min; rebuilds ~15 s.
+- **UI:** screenshot tests (below). Look at the images yourself and compare with `design/`.
+- **Before a release:** Hosni does the on-device smoke test on his phone.
+
+## Screenshot tests (`app/src/test`)
+
+Roborazzi + Robolectric render each screen on the JVM from sample data (`Samples.kt`, shaped
+like bridge.js/extract.js output and mirroring the `design/` PNGs), at 390×844 dp ×2.
+Golden images: `app/src/test/screenshots/` (`4-detail-full.png` is one tall image like design/4).
+- `./gradlew :app:verifyRoborazziDebug` — fails if any screen changed.
+- `./gradlew :app:compareRoborazziDebug` — writes `*_compare.png` (reference | diff | new) to
+  `app/build/outputs/roborazzi/`. Read these to check your own UI work.
+- `./gradlew :app:recordRoborazziDebug` — accept changes; commit the updated PNGs with the code.
+- The **Screenshots** workflow runs verify on every PR and uploads the compare images on failure.
+- Tests set `site.state` directly (`internal set`); the WebView exists but loads nothing.
+  Images are null, so cards show the bottle outline. Sample reviews use made-up names and text.
+- Not covered: the WebView itself, live data, Coil images, real-device fonts/insets.
+
 ## Testing on a device (`tools/`)
 
-Needs adb access to a phone or emulator — **not available from a cloud session**; there,
-build and reason from code, and leave on-device checks to a local session or Hosni.
+Needs adb access to a phone or emulator, so only from a local session on Hosni's Mac.
 - `tools/ui.sh tap|list|shot|state`, `tools/open.sh <url>`, `tools/fwd.sh` (DevTools on :9222),
   `tools/cdp.py` (evaluate JS / `--profile` / `--reload`), `tools/timing.sh` (section timings),
   `tools/cpu.sh`, `tools/frames.sh`. Hosni's phone: Samsung A55 (serial `RRCX5049JQF`);
@@ -80,6 +106,7 @@ build and reason from code, and leave on-device checks to a local session or Hos
 ## Working with Hosni
 
 - Prefers testing on the real phone; explain in plain language with measured numbers.
+- Wants the whole loop to run from cloud sessions; don't make a step depend on his Mac.
 - Original constraints: personal use; no prefetching or automated/bulk requests (ad blocking was
   later explicitly requested). Keep the "unofficial, not affiliated with Fragrantica" disclaimer.
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
