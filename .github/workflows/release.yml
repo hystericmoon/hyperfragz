@@ -3,8 +3,10 @@
 # Two ways to release:
 #  - Merge a commit that raises versionName in app/build.gradle.kts into main.
 #    If no release exists for that version yet, it is tagged vX.Y.Z and published.
-#    Release notes are generated from the merged pull requests. (This is the way
-#    from a cloud session, which can't push tags.)
+#    Release notes are the "## Release notes" section of the merged pull request's
+#    description (up to the next "## " heading), plus a changelog link. Without that
+#    section they are generated from the merged pull requests' titles. (This is the
+#    way from a cloud session, which can't push tags.)
 #  - Push a tag like v1.2.0 (it must match versionName). Release notes come from
 #    the tag's message (git tag -a v1.2.0 -m "…"), or are generated from commits.
 #
@@ -98,8 +100,20 @@ jobs:
             if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = tag ]; then notes=--notes-from-tag; else notes=--generate-notes; fi
             gh release create "$GITHUB_REF_NAME" "$apk" --title "HyperFragz $VERSION" $notes --latest
           else
+            # Notes from the "## Release notes" section of the PR that merged this commit.
+            prev=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name 2>/dev/null || true)
+            gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '.[0].body // ""' > pr-body.md || : > pr-body.md
+            python3 .github/release-notes.py pr-body.md > notes.md
+            if [ -s notes.md ]; then
+              if [ -n "$prev" ]; then
+                printf '\n**Full changelog:** %s/%s/compare/%s...v%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$prev" "$VERSION" >> notes.md
+              fi
+              notes=(--notes-file notes.md)
+            else
+              notes=(--generate-notes)
+            fi
             # Creates the tag vX.Y.Z on this commit.
-            gh release create "v$VERSION" "$apk" --target "$GITHUB_SHA" --title "HyperFragz $VERSION" --generate-notes --latest
+            gh release create "v$VERSION" "$apk" --target "$GITHUB_SHA" --title "HyperFragz $VERSION" "${notes[@]}" --latest
           fi
 
       - name: Remove signing key

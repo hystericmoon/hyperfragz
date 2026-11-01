@@ -57,10 +57,14 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
   logs `detail +Nms complete=… sections` for timing; WebView DevTools enabled.
 - **Release = merge a version bump into main.** Bump `versionCode` + `versionName` in
   `app/build.gradle.kts` in a PR; when Hosni merges it, `.github/workflows/release.yml` sees an
-  unreleased versionName, tags `vX.Y.Z` itself and publishes with notes generated from the merged
-  PRs (so PR titles and descriptions are the release notes). From the Mac, pushing an annotated tag
+  unreleased versionName, tags `vX.Y.Z` itself and publishes. **Release notes = the `## Release notes`
+  section of the version-bump PR's description** (up to the next `##` heading; `###` inside is fine;
+  extracted by `.github/release-notes.py`), plus a changelog link. Write it for Hosni as the app's
+  user, in plain language. Without that section the workflow falls back to `--generate-notes`, which
+  lists only the titles of every merged PR (docs ones too). From the Mac, pushing an annotated tag
   `vX.Y.Z` (must equal versionName) also works; its message becomes the notes.
-  `--generate-notes` lists only PR *titles* (and every merged PR, docs ones too), not descriptions.
+  Sessions can't create, edit or delete releases (API 403), so notes can't be fixed after the fact
+  from here: get the section right before Hosni merges.
   A session can merge a PR when Hosni asks: `POST …/pulls/N/ccr/ready_for_review` (drafts can't be
   merged), then `PUT …/pulls/N/merge -f merge_method=squash`. Release assets download with
   `gh api -H "Accept: application/octet-stream" …/releases/assets/<id>` (`gh release download` uses GraphQL).
