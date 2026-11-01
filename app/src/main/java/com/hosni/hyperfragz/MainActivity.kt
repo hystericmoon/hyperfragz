@@ -30,8 +30,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         site = SiteController(this)
         updater = Updater(this)
-        // Release builds look for a new GitHub release on each launch.
-        if (savedInstanceState == null && !updater.isDebug) updater.checkAsync()
+        // On each launch: release builds look for a new GitHub release,
+        // debug builds for a newer test build (see Updater).
+        if (savedInstanceState == null) updater.checkAsync()
         setContent { VitrineTheme { CompositionLocalProvider(LocalUpdater provides updater) { App(site) } } }
         openFromIntent(intent)
     }

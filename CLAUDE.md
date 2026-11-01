@@ -55,9 +55,12 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
   (installs beside the release build). `./run.sh` builds, installs and launches on a device.
 - Debug-only: intent extras `--es open <url>` and `--ez crashPage true`; logcat tag `Vitrine`
   logs `detail +Nms complete=… sections` for timing; WebView DevTools enabled.
-- **Release = push a tag.** Bump `versionCode` + `versionName` in `app/build.gradle.kts`, commit,
-  `git tag -a vX.Y.Z -m "notes"` (tag must equal versionName), `git push origin main vX.Y.Z`.
-  `.github/workflows/release.yml` builds, signs with repo secrets (`KEYSTORE_BASE64`,
+- **Release = merge a version bump into main.** Bump `versionCode` + `versionName` in
+  `app/build.gradle.kts` in a PR; when Hosni merges it, `.github/workflows/release.yml` sees an
+  unreleased versionName, tags `vX.Y.Z` itself and publishes with notes generated from the merged
+  PRs (so PR titles and descriptions are the release notes). From the Mac, pushing an annotated tag
+  `vX.Y.Z` (must equal versionName) also works; its message becomes the notes.
+  The workflow builds, signs with repo secrets (`KEYSTORE_BASE64`,
   `STORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) and publishes `HyperFragz-X.Y.Z.apk`
   (~3.5 min). Apps on 1.1.3+ show the Update banner on next launch.
   If a tag push doesn't trigger the workflow, delete and re-push the tag.
@@ -76,7 +79,25 @@ try to get around that). What replaces each device check:
   minutes in 429 retries. If `ANDROID_HOME` is unset or the init script is missing, run
   `bash tools/cloud-setup.sh` once. First build in a fresh session: ~2–3 min; rebuilds ~15 s.
 - **UI:** screenshot tests (below). Look at the images yourself and compare with `design/`.
-- **Before a release:** Hosni does the on-device smoke test on his phone.
+- **On the phone:** push a test build (below); Hosni installs it from the Debug app's banner.
+- **Before a release:** Hosni does the on-device smoke test on a test build of the release commit.
+
+## Test builds (to Hosni's phone)
+
+- Cloud sessions can't push tags (the git proxy and API refuse them), so test builds come from
+  branches: make the head commit's subject say what to check, then push to `test/<name>`:
+  `git commit --allow-empty -m "Check the Notes row in the filter sheet"` and
+  `git push origin HEAD:test/filter-chips`. `.github/workflows/test-build.yml` (~3–4 min) builds the
+  debug APK as versionName `X.Y.Z-test.<run number>`, signed with the release key, and publishes it
+  as pre-release `test-<run number>` titled `Test build N · <commit subject>`. Only the newest 5
+  are kept. The workflow deletes the `test/` branch afterwards (sessions can't delete branches),
+  so a name can be reused. (A `test-*` tag pushed from the Mac works too.)
+- The Debug app (`com.hosni.hyperfragz.debug`) checks the test channel on every launch and shows
+  "Test build N is ready · Install", with the tag message under it. Release apps never see them
+  (`/releases/latest` skips pre-releases).
+- Locally: `-PtestBuild=N` sets the suffix, `-PsignDebug=true` signs with keystore.properties.
+- A Debug app built on the Mac has a different signature: Android refuses to update it from a test
+  build. Uninstall it once; from then on test builds update each other.
 
 ## Screenshot tests (`app/src/test`)
 

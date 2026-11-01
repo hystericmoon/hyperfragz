@@ -27,6 +27,10 @@ private const val TAG = "Updater"
  * Updates from GitHub Releases: the latest release's tag (v1.2.3) is compared
  * with this build's versionName, and its .apk asset is downloaded and handed
  * to the system installer (Android never installs sideloaded apps silently).
+ *
+ * Debug builds follow the test channel instead: pre-releases tagged test-*
+ * (.github/workflows/test-build.yml), whose versionName ends in -test.N, where
+ * N is the workflow run number. A newer N is offered; a local build counts as 0.
  */
 class Updater(private val context: Context) {
 
@@ -34,13 +38,20 @@ class Updater(private val context: Context) {
         data object Idle : State
         data object Checking : State
         data object UpToDate : State
-        data class Available(val version: String, val apkUrl: String, val size: Long) : State
+        /** [label] replaces "HyperFragz <version> is available" (test builds); [note] goes under it. */
+        data class Available(
+            val version: String,
+            val apkUrl: String,
+            val size: Long,
+            val label: String? = null,
+            val note: String? = null,
+        ) : State
         data class Downloading(val version: String, val progress: Float) : State
         data class Failed(val message: String) : State
     }
 
     var state by mutableStateOf<State>(State.Idle)
-        private set
+        internal set // screenshot tests
 
     /** Outlives the screens: leaving the index must not cancel a download. */
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -60,7 +71,7 @@ class Updater(private val context: Context) {
     suspend fun check() {
         if (state is State.Checking || state is State.Downloading) return
         state = State.Checking
-        state = runCatching { withContext(Dispatchers.IO) { latest() } }
+        state = runCatching { withContext(Dispatchers.IO) { if (isDebug) latestTestBuild() else latest() } }
             .onFailure { Log.w(TAG, "check failed", it) }
             .getOrElse { State.Failed("Couldn't reach GitHub") }
     }
@@ -87,6 +98,37 @@ class Updater(private val context: Context) {
             }
         }
         return State.UpToDate // a release without an APK is nothing to install
+    }
+
+    /** Newest test-* pre-release, if its build number is higher than this build's. */
+    private fun latestTestBuild(): State {
+        val conn = URL("https://api.github.com/repos/$REPO/releases?per_page=20").openConnection() as HttpURLConnection
+        conn.setRequestProperty("Accept", "application/vnd.github+json")
+        conn.connectTimeout = 10_000
+        conn.readTimeout = 10_000
+        val json = try {
+            conn.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            conn.disconnect()
+        }
+        val releases = org.json.JSONArray(json)
+        val mine = testBuildNumber(currentVersion)
+        var best: State.Available? = null
+        var bestN = mine
+        for (i in 0 until releases.length()) {
+            val o = releases.getJSONObject(i)
+            if (!o.optBoolean("prerelease") || !o.optString("tag_name").startsWith("test-")) continue
+            val assets = o.optJSONArray("assets") ?: continue
+            val apk = (0 until assets.length()).map { assets.getJSONObject(it) }.firstOrNull { it.optString("name").endsWith(".apk") } ?: continue
+            val version = apk.optString("name").removePrefix("HyperFragz-Debug-").removeSuffix(".apk")
+            val n = testBuildNumber(version)
+            if (n <= bestN) continue
+            bestN = n
+            // Title is "Test build N · what to check" (from the tag message).
+            val note = o.optString("name").substringAfter(" · ", "").takeIf { it.isNotBlank() }
+            best = State.Available(version, apk.optString("browser_download_url"), apk.optLong("size"), label = "Test build $n is ready", note = note)
+        }
+        return best ?: State.UpToDate
     }
 
     /** Downloads the APK, then opens the system install prompt. */
@@ -150,6 +192,9 @@ class Updater(private val context: Context) {
     }
 
     companion object {
+        /** "1.2.0-test.14" → 14; anything else → 0. */
+        fun testBuildNumber(version: String): Int = version.substringAfter("-test.", "").toIntOrNull() ?: 0
+
         /** "1.10.0" > "1.9.2"; missing parts count as 0. */
         fun isNewer(candidate: String, current: String): Boolean {
             val a = candidate.split('.').map { it.takeWhile(Char::isDigit).toIntOrNull() ?: 0 }

@@ -39,6 +39,14 @@ android {
         debug {
             // Installs next to the release build, so testing never replaces it.
             applicationIdSuffix = ".debug"
+            // Test builds (.github/workflows/test-build.yml): -PtestBuild=<run number>
+            // makes the version 1.2.0-test.<n>, which the Debug app's updater compares.
+            providers.gradleProperty("testBuild").orNull?.let { versionNameSuffix = "-test.$it" }
+            // -PsignDebug=true: sign with the release key, so every test build installs
+            // over the previous one (CI's own debug key changes from run to run).
+            if (providers.gradleProperty("signDebug").orNull == "true" && signing.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         release {
             isMinifyEnabled = true

@@ -37,7 +37,7 @@ fun UpdateBanner() {
     val updater = LocalUpdater.current ?: return
     val s = updater.state
     val text = when (s) {
-        is State.Available -> "HyperFragz ${s.version} is available"
+        is State.Available -> s.label ?: "HyperFragz ${s.version} is available"
         is State.Downloading -> "Downloading ${s.version}… ${(s.progress * 100).roundToInt()}%"
         else -> return
     }
@@ -53,11 +53,14 @@ fun UpdateBanner() {
     ) {
         Column(Modifier.weight(1f).padding(vertical = 10.dp)) {
             Text(text, style = sans(14, V.Text, 500))
+            if (s is State.Available && s.note != null) {
+                Text(s.note, style = sans(13, V.Text2), maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+            }
             if (s is State.Downloading) MeterBar(s.progress, V.Primary, Modifier.fillMaxWidth().padding(top = 8.dp))
         }
         if (s is State.Available) {
             Text(
-                "Update",
+                if (s.label != null) "Install" else "Update",
                 style = sans(14, V.Primary, 500),
                 modifier = Modifier
                     .heightIn(min = 48.dp)
@@ -90,7 +93,10 @@ fun UpdateMenuItem(onDismiss: () -> Unit, onResult: (String) -> Unit) {
             updater.dismissed = false
             updater.checkAsync { s ->
                 when (s) {
-                    is State.UpToDate -> onResult("HyperFragz is up to date (${updater.currentVersion}).")
+                    is State.UpToDate -> onResult(
+                        if (updater.isDebug) "No newer test build (${updater.currentVersion})."
+                        else "HyperFragz is up to date (${updater.currentVersion})."
+                    )
                     is State.Failed -> onResult(s.message)
                     else -> Unit // the banner shows the update
                 }
