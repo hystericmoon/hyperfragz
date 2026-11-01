@@ -83,6 +83,17 @@ try to get around that). What replaces each device check:
 - **On the phone:** push a test build (below); Hosni installs it from the Debug app's banner.
 - **Before a release:** Hosni does the on-device smoke test on a test build of the release commit.
 
+What the cloud session's GitHub access allows (found 2026-11-01):
+- Works: clone, fetch, pushing branches, the REST API through `gh api` (create/update PRs:
+  `gh api repos/hystericmoon/hyperfragz/pulls -f title=… -f head=… -f base=main -F draft=true -F body=@file`).
+- Refused: pushing or creating tags, deleting branches (git and API), and GraphQL, so
+  `gh pr create` / `gh pr view` fail. Hence the branch-based test builds and release-on-merge.
+- The repo is attached with push access via `add_repo` (access "push"); clone to `/home/user/hyperfragz`.
+  A shallow clone fetches only main: run
+  `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'` before working with branches.
+- Large Google Drive files: `download_file_content` saves the result to a JSON file instead of
+  returning it; base64-decode its `content` field with python.
+
 ## Test builds (to Hosni's phone)
 
 - Cloud sessions can't push tags (the git proxy and API refuse them), so test builds come from
@@ -162,3 +173,14 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
 - Ideas not done yet: none queued. Past suggestions were links, favourites, problem reports and
   CI releases — all shipped in 1.2.0.
+
+## Status (2026-11-01)
+
+- Cloud workflow built in three stacked PRs: #1 screenshot tests + cloud setup, #2 test builds +
+  release-on-merge, #3 saved pages. Merge in that order (each targets the previous branch).
+- Done and verified: cloud builds, screenshot tests (local + CI), test builds test-1…3 published
+  and signed with the release cert, test-branch auto-delete, saved-page checks on two real pages.
+- Hosni's phone runs HyperFragz Debug from test builds (Mac-built Debug app replaced).
+  The environment setup script (tools/cloud-setup.sh) is pasted into the cloud environment.
+- Not yet exercised: release-on-merge (needs the next version bump; check the Release run and
+  the published APK's cert after it), and the stricter snapshot() on the phone (test-3).
