@@ -2,6 +2,7 @@ package com.hosni.hyperfragz
 
 import android.app.Application
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
@@ -11,6 +12,7 @@ import com.github.takahirom.roborazzi.captureRoboImage
 import com.github.takahirom.roborazzi.captureScreenRoboImage
 import com.hosni.hyperfragz.ui.DetailScreen
 import com.hosni.hyperfragz.ui.IndexScreen
+import com.hosni.hyperfragz.ui.LocalUpdater
 import com.hosni.hyperfragz.ui.RefineSheet
 import com.hosni.hyperfragz.ui.SavedScreen
 import com.hosni.hyperfragz.ui.VitrineTheme
@@ -48,6 +50,18 @@ class ScreenshotTest {
         site.state = Samples.results
         show { IndexScreen(site, onOpenFilters = {}, onOpenSaved = {}) }
         shot("1-index-results")
+    }
+
+    /** Debug app: a test build from .github/workflows/test-build.yml is waiting. */
+    @Test fun index_test_build_banner() {
+        site.state = Samples.results
+        val updater = Updater(ApplicationProvider.getApplicationContext<Application>())
+        updater.state = Updater.State.Available(
+            version = "1.2.0-test.14", apkUrl = "", size = 0,
+            label = "Test build 14 is ready", note = "New filter chips: check the Notes row",
+        )
+        show { CompositionLocalProvider(LocalUpdater provides updater) { IndexScreen(site, onOpenFilters = {}, onOpenSaved = {}) } }
+        shot("1-index-test-build-banner")
     }
 
     @Test fun filter_sheet() {

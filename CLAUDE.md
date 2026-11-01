@@ -76,7 +76,21 @@ try to get around that). What replaces each device check:
   minutes in 429 retries. If `ANDROID_HOME` is unset or the init script is missing, run
   `bash tools/cloud-setup.sh` once. First build in a fresh session: ~2–3 min; rebuilds ~15 s.
 - **UI:** screenshot tests (below). Look at the images yourself and compare with `design/`.
-- **Before a release:** Hosni does the on-device smoke test on his phone.
+- **On the phone:** push a test build (below); Hosni installs it from the Debug app's banner.
+- **Before a release:** Hosni does the on-device smoke test on a test build of the release commit.
+
+## Test builds (to Hosni's phone)
+
+- `git tag -a test-<short-name> -m "What to check, in one line"` on the commit, then
+  `git push origin test-<short-name>`. `.github/workflows/test-build.yml` (~3–4 min) builds the debug
+  APK as versionName `X.Y.Z-test.<run number>`, signed with the release key, and publishes it as a
+  pre-release titled `Test build N · <tag message>`. Only the newest 5 test builds are kept.
+- The Debug app (`com.hosni.hyperfragz.debug`) checks the test channel on every launch and shows
+  "Test build N is ready · Install", with the tag message under it. Release apps never see them
+  (`/releases/latest` skips pre-releases).
+- Locally: `-PtestBuild=N` sets the suffix, `-PsignDebug=true` signs with keystore.properties.
+- A Debug app built on the Mac has a different signature: Android refuses to update it from a test
+  build. Uninstall it once; from then on test builds update each other.
 
 ## Screenshot tests (`app/src/test`)
 
