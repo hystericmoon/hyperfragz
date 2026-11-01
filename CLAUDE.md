@@ -180,6 +180,11 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
   later explicitly requested). Keep the "unofficial, not affiliated with Fragrantica" disclaimer.
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
 - Past suggestions (links, favourites, problem reports, CI releases) all shipped in 1.2.0.
+- **Sessions own release notes.** Every version-bump PR gets a `## Release notes` section written
+  for Hosni as the app's user (what changed on screen, plain language, numbers where useful); it
+  becomes the published notes. Don't hand him notes to paste. Sessions can't edit a release once
+  it's published, and working around that (e.g. a workflow that edits releases) was refused, so the
+  section has to be right before he merges. v1.2.1's notes are GitHub's generated list.
 
 ## Bar colours (1.2.1)
 
