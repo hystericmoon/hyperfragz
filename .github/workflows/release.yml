@@ -1,7 +1,12 @@
-# Push a tag like v1.2.0 → a signed APK is built and published as a GitHub
-# release; the app's Update banner picks it up. The tag must match versionName
-# in app/build.gradle.kts. Release notes come from the tag's message
-# (git tag -a v1.2.0 -m "…"), or are generated from commits.
+# Publishes a signed APK as a GitHub release; the app's Update banner picks it up.
+#
+# Two ways to release:
+#  - Merge a commit that raises versionName in app/build.gradle.kts into main.
+#    If no release exists for that version yet, it is tagged vX.Y.Z and published.
+#    Release notes are generated from the merged pull requests. (This is the way
+#    from a cloud session, which can't push tags.)
+#  - Push a tag like v1.2.0 (it must match versionName). Release notes come from
+#    the tag's message (git tag -a v1.2.0 -m "…"), or are generated from commits.
 #
 # Repository secrets: KEYSTORE_BASE64 (base64 of the .jks), STORE_PASSWORD,
 # KEY_ALIAS, KEY_PASSWORD.
@@ -10,9 +15,15 @@ name: Release
 on:
   push:
     tags: ["v*"]
+    branches: [main]
+    paths: [app/build.gradle.kts]
 
 permissions:
   contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -20,28 +31,41 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' app/build.gradle.kts)
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+              echo "::error::Tag $GITHUB_REF_NAME doesn't match versionName $version"
+              exit 1
+            fi
+            echo "PUBLISH=true" >> "$GITHUB_ENV"
+          elif gh release view "v$version" > /dev/null 2>&1; then
+            echo "v$version is already released; nothing to do."
+            echo "PUBLISH=false" >> "$GITHUB_ENV"
+          else
+            echo "PUBLISH=true" >> "$GITHUB_ENV"
+          fi
+
       - uses: actions/setup-java@v5
+        if: env.PUBLISH == 'true'
         with:
           distribution: temurin
           java-version: 21
 
       # The runner ships the Android SDK; add the platform this app compiles against.
       - name: Android SDK
+        if: env.PUBLISH == 'true'
         run: |
           sdkmanager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           yes | "$sdkmanager" --licenses > /dev/null
           "$sdkmanager" "platforms;android-37.0" > /dev/null
 
-      - name: Check the tag matches versionName
-        run: |
-          version=$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' app/build.gradle.kts)
-          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
-            echo "::error::Tag $GITHUB_REF_NAME doesn't match versionName $version"
-            exit 1
-          fi
-          echo "VERSION=$version" >> "$GITHUB_ENV"
-
       - name: Signing key
+        if: env.PUBLISH == 'true'
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
@@ -58,18 +82,25 @@ jobs:
           } > keystore.properties
 
       - name: Build
+        if: env.PUBLISH == 'true'
         run: ./gradlew --no-daemon :app:assembleRelease
 
       - name: Publish
+        if: env.PUBLISH == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           apk="HyperFragz-$VERSION.apk"
           cp app/build/outputs/apk/release/app-release.apk "$apk"
-          # checkout can leave a lightweight copy of the tag; fetch the real one for its message.
-          git fetch --force origin "refs/tags/$GITHUB_REF_NAME:refs/tags/$GITHUB_REF_NAME"
-          if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = tag ]; then notes=--notes-from-tag; else notes=--generate-notes; fi
-          gh release create "$GITHUB_REF_NAME" "$apk" --title "HyperFragz $VERSION" $notes --latest
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            # checkout can leave a lightweight copy of the tag; fetch the real one for its message.
+            git fetch --force origin "refs/tags/$GITHUB_REF_NAME:refs/tags/$GITHUB_REF_NAME"
+            if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = tag ]; then notes=--notes-from-tag; else notes=--generate-notes; fi
+            gh release create "$GITHUB_REF_NAME" "$apk" --title "HyperFragz $VERSION" $notes --latest
+          else
+            # Creates the tag vX.Y.Z on this commit.
+            gh release create "v$VERSION" "$apk" --target "$GITHUB_SHA" --title "HyperFragz $VERSION" --generate-notes --latest
+          fi
 
       - name: Remove signing key
         if: always()

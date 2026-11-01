@@ -55,9 +55,12 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
   (installs beside the release build). `./run.sh` builds, installs and launches on a device.
 - Debug-only: intent extras `--es open <url>` and `--ez crashPage true`; logcat tag `Vitrine`
   logs `detail +Nms complete=… sections` for timing; WebView DevTools enabled.
-- **Release = push a tag.** Bump `versionCode` + `versionName` in `app/build.gradle.kts`, commit,
-  `git tag -a vX.Y.Z -m "notes"` (tag must equal versionName), `git push origin main vX.Y.Z`.
-  `.github/workflows/release.yml` builds, signs with repo secrets (`KEYSTORE_BASE64`,
+- **Release = merge a version bump into main.** Bump `versionCode` + `versionName` in
+  `app/build.gradle.kts` in a PR; when Hosni merges it, `.github/workflows/release.yml` sees an
+  unreleased versionName, tags `vX.Y.Z` itself and publishes with notes generated from the merged
+  PRs (so PR titles and descriptions are the release notes). From the Mac, pushing an annotated tag
+  `vX.Y.Z` (must equal versionName) also works; its message becomes the notes.
+  The workflow builds, signs with repo secrets (`KEYSTORE_BASE64`,
   `STORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) and publishes `HyperFragz-X.Y.Z.apk`
   (~3.5 min). Apps on 1.1.3+ show the Update banner on next launch.
   If a tag push doesn't trigger the workflow, delete and re-push the tag.
@@ -81,10 +84,13 @@ try to get around that). What replaces each device check:
 
 ## Test builds (to Hosni's phone)
 
-- `git tag -a test-<short-name> -m "What to check, in one line"` on the commit, then
-  `git push origin test-<short-name>`. `.github/workflows/test-build.yml` (~3–4 min) builds the debug
-  APK as versionName `X.Y.Z-test.<run number>`, signed with the release key, and publishes it as a
-  pre-release titled `Test build N · <tag message>`. Only the newest 5 test builds are kept.
+- Cloud sessions can't push tags (the git proxy and API refuse them), so test builds come from
+  branches: make the head commit's subject say what to check, then push to `test/<name>`:
+  `git commit --allow-empty -m "Check the Notes row in the filter sheet"` and
+  `git push origin HEAD:test/filter-chips`. `.github/workflows/test-build.yml` (~3–4 min) builds the
+  debug APK as versionName `X.Y.Z-test.<run number>`, signed with the release key, and publishes it
+  as pre-release `test-<run number>` titled `Test build N · <commit subject>`. Only the newest 5
+  are kept. Delete the `test/` branch afterwards. (A `test-*` tag pushed from the Mac works too.)
 - The Debug app (`com.hosni.hyperfragz.debug`) checks the test channel on every launch and shows
   "Test build N is ready · Install", with the tag message under it. Release apps never see them
   (`/releases/latest` skips pre-releases).

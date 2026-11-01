@@ -1,9 +1,11 @@
-# Push a tag like test-pr24 → a debug APK ("HyperFragz Debug") is built and
-# published as a GitHub pre-release. The Debug app on Hosni's phone shows
-# "Test build N is ready · Install" on its next launch.
-#
-# The tag's message is the banner's subtitle and the release notes, so write
-# what to check: git tag -a test-pr24 -m "New filter chips: check the Notes row".
+# Push a branch named test/<anything> → a debug APK ("HyperFragz Debug") is
+# built and published as a GitHub pre-release tagged test-<run number>. The
+# Debug app on Hosni's phone shows "Test build N is ready · Install" on its next
+# launch, with the head commit's subject under it, so make that say what to check:
+#   git commit --allow-empty -m "Check the Notes row in the filter sheet"
+#   git push origin HEAD:test/filter-chips
+# (Pushing a tag test-<name> works too, from a machine that can push tags; then
+# the tag message is the subtitle.)
 #
 # Signed with the release key (same secrets as release.yml), so every test
 # build updates the previous one. Only the newest 5 test builds are kept.
@@ -11,6 +13,7 @@ name: Test build
 
 on:
   push:
+    branches: ["test/**"]
     tags: ["test-*"]
 
 permissions:
@@ -65,16 +68,20 @@ jobs:
           version=$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' app/build.gradle.kts)
           apk="HyperFragz-Debug-$version-test.$N.apk"
           cp app/build/outputs/apk/debug/app-debug.apk "$apk"
-          git fetch --force origin "refs/tags/$GITHUB_REF_NAME:refs/tags/$GITHUB_REF_NAME"
-          if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = tag ]; then
-            subject=$(git tag -l --format='%(contents:subject)' "$GITHUB_REF_NAME")
-            notes=--notes-from-tag
-          else
-            subject=$(git log -1 --format=%s)
-            notes="--notes=Built from $(git rev-parse --short HEAD): $subject"
+          subject=$(git log -1 --format=%s)
+          notes="Built from ${GITHUB_REF_NAME} at $(git rev-parse --short HEAD)."
+          tag="test-$N"
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            tag="$GITHUB_REF_NAME"
+            git fetch --force origin "refs/tags/$tag:refs/tags/$tag"
+            if [ "$(git cat-file -t "$tag")" = tag ]; then
+              subject=$(git tag -l --format='%(contents:subject)' "$tag")
+              notes=$(git tag -l --format='%(contents)' "$tag")
+            fi
           fi
-          gh release create "$GITHUB_REF_NAME" "$apk" --prerelease --latest=false \
-            --title "Test build $N · $subject" "$notes"
+          # On a branch push this also creates the tag test-N on this commit.
+          gh release create "$tag" "$apk" --target "$GITHUB_SHA" --prerelease --latest=false \
+            --title "Test build $N · $subject" --notes "$notes"
 
       - name: Keep the newest 5 test builds
         env:
