@@ -1,0 +1,36 @@
+# On every pull request: render each screen and compare it with the golden
+# images in app/src/test/screenshots. If anything changed, the run fails and the
+# "screenshot-diffs" artifact holds reference / diff / new images side by side.
+# Intended changes: run ./gradlew :app:recordRoborazziDebug and commit the PNGs.
+name: Screenshots
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Android SDK
+        run: |
+          sdkmanager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$sdkmanager" --licenses > /dev/null
+          "$sdkmanager" "platforms;android-37.0" > /dev/null
+
+      - name: Compare screens
+        run: ./gradlew --no-daemon :app:verifyRoborazziDebug
+
+      - name: Upload diffs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-diffs
+          path: app/build/outputs/roborazzi/*_compare.png

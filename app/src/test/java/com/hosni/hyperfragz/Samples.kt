@@ -47,7 +47,7 @@ object Samples {
     private val refinements = listOf(
         Refinement("refinementList", "gender", "female", "Gender", "Female", without = 4120),
         Refinement("refinementList", "designer", "yves saint laurent", "Designers", "Yves Saint Laurent", without = 18_204),
-        Refinement("numericMenu", "votes", "100", "Minimum votes", "100+ votes", without = 212),
+        Refinement("numericMenu", "votes", "100", "Minimum votes", "100+", without = 212),
     )
 
     /** design/1 · Results */
@@ -72,7 +72,7 @@ object Samples {
             refinements[0],
             Refinement("refinementList", "notes", "leather", "Notes", "Leather", without = 3),
             refinements[1].copy(without = 41),
-            Refinement("numericMenu", "votes", "1000", "Minimum votes", "1000+ votes", without = 7),
+            Refinement("numericMenu", "votes", "1000", "Minimum votes", "1000+", without = 7),
         ),
     )
 

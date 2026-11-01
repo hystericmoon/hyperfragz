@@ -350,17 +350,18 @@ class SiteController(private val context: Context) {
         settings.mediaPlaybackRequiresUserGesture = true
         // Hidden data source: the native UI loads the images it shows.
         settings.blockNetworkImage = true
+        // runCatching: some WebViews (and Robolectric's, in the screenshot tests)
+        // report a feature as supported but still throw when it's used.
         if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
-            androidx.webkit.WebSettingsCompat.setAlgorithmicDarkeningAllowed(settings, false)
+            runCatching { androidx.webkit.WebSettingsCompat.setAlgorithmicDarkeningAllowed(settings, false) }
         }
 
         addJavascriptInterface(NativeBridge(), "VitrineNative")
 
         val startScript = documentStartScript()
-        val hasDocStart = WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)
-        if (hasDocStart) {
-            WebViewCompat.addDocumentStartJavaScript(this, startScript, setOf(ORIGIN))
-        }
+        // Without document-start support the script is injected in onPageStarted instead.
+        val hasDocStart = WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT) &&
+            runCatching { WebViewCompat.addDocumentStartJavaScript(this, startScript, setOf(ORIGIN)) }.isSuccess
 
         webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
