@@ -171,8 +171,26 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Original constraints: personal use; no prefetching or automated/bulk requests (ad blocking was
   later explicitly requested). Keep the "unofficial, not affiliated with Fragrantica" disclaimer.
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
-- Ideas not done yet: none queued. Past suggestions were links, favourites, problem reports and
-  CI releases — all shipped in 1.2.0.
+- Past suggestions (links, favourites, problem reports, CI releases) all shipped in 1.2.0.
+
+## Next up (agreed 2026-11-01): bar contrast, then release 1.2.1
+
+1. **Bar contrast (WCAG 1.4.11, non-text 3:1).** Measured on the perfume page (DetailScreen.kt):
+   rating split segments Ok 2.59 / Dislike 1.60 / Hate 1.36 on ground; Longevity/Sillage minor
+   buckets (V.Dim) 1.60; Best worn rows 4–6 (V.Olive on V.Track) 2.42. Accords pass (≥3.12); all
+   text passes. SegmentBar/MeterBar are canvases with no semantics, so TalkBack hears only the
+   summary sentence. Options, drawn in the app's colours: https://claude.ai/artifact/FSn2PDmssx3Rc5QT8ZTnr7
+   - **A (recommended): lift the ramp.** Same layout as design/4. Rating split love→hate:
+     #CFA53B, #AE8F3E, #8C7942, #7C6E43, #6B6345 (all ≥3.12 on ground, the accords' own ramp);
+     skin meters: winner Primary, ≥12% #8C7942, the rest #6B6345; Best worn rows 4+: #8C7942
+     (3.41 on track). Add contentDescriptions listing every bucket with its share.
+   - B: keep colours, add a percentage legend under each bar (text carries the data; +~16 dp each).
+   - C: rating split as five labelled rows like Best worn (+~95 dp; departs from design/4).
+   Ask Hosni which one if he hasn't said. Re-record screenshots and show him the compare images.
+2. **Release 1.2.1** with that change (also ships the WebView feature fallbacks from #1): send a
+   test build for his smoke test, then a PR bumping versionCode 10 / versionName 1.2.1. When it's
+   merged, check the Release run published v1.2.1 and that the APK's cert is `fa727de5…11ccc6`
+   (build-tools 36.0.0 `apksigner verify --print-certs`). This is the first real release-on-merge.
 
 ## Status (2026-11-01)
 
