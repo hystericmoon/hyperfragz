@@ -118,9 +118,16 @@ Golden images: `app/src/test/screenshots/` (`4-detail-full.png` is one tall imag
 
 When Fragrantica changes its markup, fix the scripts against saved copies of its pages:
 - Hosni saves one in the Debug app: FRAGRANTICA (or ⋮ on a perfume) → **Share page for testing**,
-  and attaches the .html to the session (or a GitHub issue). `HyperExtract.snapshot()` in
-  extract.js drops scripts, frames and ads and replaces members' names and review text.
-  Still skim a new page for names before committing it (public repo).
+  saves it to Google Drive and gives the file name; fetch it with the Google Drive connector
+  (`download_file_content`: the result is written to a JSON file; base64-decode its `content`).
+  GitHub issues don't take .html attachments.
+- `HyperExtract.snapshot()` in extract.js drops scripts, frames and ads and removes members:
+  review authors and text, photo cards, the recent-reviews widget, avatars, profile links
+  (`/@handle`, `/member/`, `/fragram/`), then replaces every name it collected anywhere else.
+- Always run `node tools/pages/clean.cjs <file>` on a new page (re-cleans it with the current
+  snapshot(), in case the phone runs an older build), then grep it for names before committing
+  (public repo). Members' names have turned up in new places before; if you find one, make
+  snapshot() catch it and add the pattern to the privacy check in check.cjs.
 - Put it in `tools/pages/saved/<name>.html` (first line `<!-- hf-url: … -->`, keep it).
 - `node tools/pages/check.cjs` runs extract.js + bridge.js on every saved page in the preinstalled
   headless Chromium, offline (all other requests blocked), prints which sections came out
@@ -131,8 +138,9 @@ When Fragrantica changes its markup, fix the scripts against saved copies of its
   sections are back, `--update`, commit page + expected JSON with the fix.
 - Limits: search pages are saved after rendering, so bridge.js can read hits, counts and panels
   but not the live Vue/InstantSearch state (applied refinements come out null), and nothing the
-  scripts *do* (filters, sorting, loading more) can be replayed. `synthetic-perfume.html` is
-  hand-written from the selectors, only to prove the runner works.
+  scripts *do* (filters, sorting, loading more) can be replayed. The search result count is
+  live-only too. `perfume-liquid-brun.html` and `search-male-musk.html` are real pages saved
+  2026-11-01 (all sections extract); `synthetic-perfume.html` is hand-written from the selectors.
 
 ## Testing on a device (`tools/`)
 

@@ -104,7 +104,8 @@ function summary(r) {
     });
   }
   const s = r.result;
-  return [`${s.hitList.length ? '✓' : '✗'} hits (${s.hitList.length})`, `${s.total != null ? '✓' : '✗'} total (${s.total})`,
+  // The result count comes from the live InstantSearch instance or Algolia responses, never the HTML.
+  return [`${s.hitList.length ? '✓' : '✗'} hits (${s.hitList.length})`, `– total (live page only)`,
     `${s.panels.length ? '✓' : '✗'} filter panels (${s.panels.length})`, `${s.sort && s.sort.options.length ? '✓' : '✗'} sort options`];
 }
 
@@ -117,10 +118,17 @@ function stable(o) {
 // members' names, review text, scripts, frames and ads. Checked on every run.
 async function privacyCheck(browser) {
   const url = 'https://www.fragrantica.com/perfume/Privacy/Check-1.html';
+  // One of each place member data has turned up on real pages.
   const html = `<html><head><script>var tracking = 1</script></head><body>
     <div class="tw-review-card" id="parent1"><meta itemprop="name" content="RealMemberName">
-    <a href="/member/12345">RealMemberName</a><img src="https://x/a.jpg" alt="RealMemberName">
+    <a href="https://www.fragrantica.com/@realhandle"><img src="https://fimgs.net/mdimg/avatari/s.1.jpg" alt="RealMemberName"></a>
+    <a href="/member/12345">RealMemberName</a>
     <p>Posted by RealMemberName</p><div class="tw-review-prose"><p>Words from a private review.</p></div></div>
+    <div class="tw-photo-card"><a data-caption="<a href='https://www.fragrantica.com/fragram/fp/1'>PhotoMember (Fragrantica.com)</a>">
+      <img src="https://fimgs.net/photogram/p180/x.jpg" alt="Photo by PhotoMember"></a></div>
+    <a href="/perfume/X/Y-2.html"><span class="group/tooltip cursor-help"> WidgetMember <div>Snippet of another review.</div></span>
+      <img src="https://fimgs.net/himg/o.1.png" alt="WidgetMember"></a>
+    <p>Thanks to PhotoMember and realhandle.</p>
     <iframe src="https://ads.example"></iframe><div id="div-gpt-ad-1">ad</div></body></html>`;
   const context = await browser.newContext();
   await context.route('**/*', (r) => (r.request().url() === url ? r.fulfill({ body: html, contentType: 'text/html' }) : r.abort()));
@@ -129,7 +137,8 @@ async function privacyCheck(browser) {
   await page.addScriptTag({ content: fs.readFileSync(path.join(ASSETS, 'extract.js'), 'utf8') });
   const out = await page.evaluate(() => window.HyperExtract.snapshot());
   await context.close();
-  return ['RealMemberName', 'private review', '<script', '<iframe', 'div-gpt', '/member/12345'].filter((s) => out.includes(s));
+  return ['RealMemberName', 'realhandle', 'PhotoMember', 'WidgetMember', 'private review', 'another review', 'avatari', 'fragram/fp',
+    '<script', '<iframe', 'div-gpt', '/member/12345'].filter((s) => out.includes(s));
 }
 
 (async () => {
@@ -142,7 +151,7 @@ async function privacyCheck(browser) {
       process.exitCode = 1;
       return;
     }
-    console.log('OK       snapshot privacy (names, review text, scripts and ads are removed)');
+    console.log('OK       snapshot privacy (review authors and text, photo credits, avatars, profile links, scripts and ads are removed)');
   }
   if (!fs.existsSync(SAVED)) fs.mkdirSync(SAVED, { recursive: true });
   const files = fs.readdirSync(SAVED).filter((f) => f.endsWith('.html') && (!filter || f.includes(filter))).sort();

@@ -1,0 +1,760 @@
+{
+  "page": "search",
+  "url": "https://www.fragrantica.com/search/",
+  "total": null,
+  "hits": 30,
+  "hitList": [
+    {
+      "url": "https://www.fragrantica.com/perfume/French-Avenue/Liquid-Brun-94713.html",
+      "name": "Liquid Brun",
+      "brand": "French Avenue",
+      "year": "2024",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.94713.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/Supremacy-Collector-s-Edition-Pour-Homme-98689.html",
+      "name": "Supremacy Collector's Edition Pour Homme",
+      "brand": "Afnan",
+      "year": "2024",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.98689.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Armaf/Club-de-Nuit-Intense-Man-34696.html",
+      "name": "Club de Nuit Intense Man",
+      "brand": "Armaf",
+      "year": "2015",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.34696.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Ice-89050.html",
+      "name": "Hawas Ice",
+      "brand": "Rasasi",
+      "year": "2023",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.89050.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Creed/Aventus-9828.html",
+      "name": "Aventus",
+      "brand": "Creed",
+      "year": "2010",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.9828.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Parfums-de-Marly/Althair-84109.html",
+      "name": "Althaïr",
+      "brand": "Parfums de Marly",
+      "year": "2023",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.84109.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Versace/Versace-Pour-Homme-Dylan-Blue-40031.html",
+      "name": "Versace Pour Homme Dylan Blue",
+      "brand": "Versace",
+      "year": "2016",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.40031.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Prada/Paradigme-110661.html",
+      "name": "Paradigme",
+      "brand": "Prada",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.110661.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Nautica/Nautica-Voyage-913.html",
+      "name": "Nautica Voyage",
+      "brand": "Nautica",
+      "year": "2006",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.913.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rayhaan/Aquatica-120605.html",
+      "name": "Aquatica",
+      "brand": "Rayhaan",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.120605.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Afnan/Turathi-Blue-70839.html",
+      "name": "Turathi Blue",
+      "brand": "Afnan",
+      "year": "2021",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.70839.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Issey-Miyake/L-Eau-d-Issey-Pour-Homme-721.html",
+      "name": "L'Eau d'Issey Pour Homme",
+      "brand": "Issey Miyake",
+      "year": "1994",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.721.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Giorgio-Armani/Acqua-di-Gio-410.html",
+      "name": "Acqua di Gio",
+      "brand": "Giorgio Armani",
+      "year": "1996",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.410.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Lalique/Encre-Noire-1834.html",
+      "name": "Encre Noire",
+      "brand": "Lalique",
+      "year": "2006",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.1834.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-for-Him-46890.html",
+      "name": "Hawas for Him",
+      "brand": "Rasasi",
+      "year": "2015",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.46890.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Versace/Versace-Pour-Homme-2318.html",
+      "name": "Versace Pour Homme",
+      "brand": "Versace",
+      "year": "2008",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.2318.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Versace/Eros-Energy-92647.html",
+      "name": "Eros Energy",
+      "brand": "Versace",
+      "year": "2024",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.92647.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Davidoff/Cool-Water-507.html",
+      "name": "Cool Water",
+      "brand": "Davidoff",
+      "year": "1988",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.507.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Kobra-112706.html",
+      "name": "Hawas Kobra",
+      "brand": "Rasasi",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.112706.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Giorgio-Armani/Acqua-di-Gio-Profondo-59532.html",
+      "name": "Acqua di Giò Profondo",
+      "brand": "Giorgio Armani",
+      "year": "2020",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.59532.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rayhaan/Terra-118549.html",
+      "name": "Terra",
+      "brand": "Rayhaan",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.118549.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Tropical-108054.html",
+      "name": "Hawas Tropical",
+      "brand": "Rasasi",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.108054.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Bvlgari/Tygar-41222.html",
+      "name": "Tygar",
+      "brand": "Bvlgari",
+      "year": "2016",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.41222.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Versace/Versace-Man-Eau-Fraiche-644.html",
+      "name": "Versace Man Eau Fraiche",
+      "brand": "Versace",
+      "year": "2006",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.644.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Dolce-Gabbana/Light-Blue-Eau-Intense-Pour-Homme-44035.html",
+      "name": "Light Blue Eau Intense Pour Homme",
+      "brand": "Dolce&Gabbana",
+      "year": "2017",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.44035.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Chanel/Allure-Homme-Sport-607.html",
+      "name": "Allure Homme Sport",
+      "brand": "Chanel",
+      "year": "2004",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.607.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Chanel/Allure-Homme-Sport-Eau-Extreme-14669.html",
+      "name": "Allure Homme Sport Eau Extreme",
+      "brand": "Chanel",
+      "year": "2012",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.14669.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Chanel/Bleu-de-Chanel-9099.html",
+      "name": "Bleu de Chanel",
+      "brand": "Chanel",
+      "year": "2010",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.9099.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/French-Avenue/Amber-Empire-116876.html",
+      "name": "Amber Empire",
+      "brand": "French Avenue",
+      "year": "2025",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.116876.2x.webp"
+    },
+    {
+      "url": "https://www.fragrantica.com/perfume/Dior/Fahrenheit-228.html",
+      "name": "Fahrenheit",
+      "brand": "Dior",
+      "year": "1988",
+      "gender": "male",
+      "thumb": "https://fimgs.net/mdimg/perfume-thumbs/dark-270x270.228.2x.webp"
+    }
+  ],
+  "query": "",
+  "sort": {
+    "options": [
+      {
+        "value": "fragrantica_perfumes",
+        "label": "Most popular"
+      },
+      {
+        "value": "fragrantica_perfumes_rating",
+        "label": "Highest rated"
+      },
+      {
+        "value": "fragrantica_perfumes_longevity",
+        "label": "The longest lasting (longevity)"
+      },
+      {
+        "value": "fragrantica_perfumes_sillage",
+        "label": "The biggest projection (sillage)"
+      }
+    ],
+    "selected": "fragrantica_perfumes"
+  },
+  "panels": [
+    {
+      "title": "Gender",
+      "type": "list",
+      "items": [
+        {
+          "value": "male",
+          "label": "male",
+          "count": 6154,
+          "checked": true
+        },
+        {
+          "value": "unisex",
+          "label": "unisex",
+          "count": 22408,
+          "checked": false
+        },
+        {
+          "value": "female",
+          "label": "female",
+          "count": 18597,
+          "checked": false
+        }
+      ],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Designers",
+      "type": "list",
+      "items": [
+        {
+          "value": "Lattafa Perfumes",
+          "label": "Lattafa Perfumes",
+          "count": 14,
+          "checked": false
+        },
+        {
+          "value": "Dior",
+          "label": "Dior",
+          "count": 12,
+          "checked": false
+        },
+        {
+          "value": "Yves Saint Laurent",
+          "label": "Yves Saint Laurent",
+          "count": 15,
+          "checked": false
+        },
+        {
+          "value": "Giorgio Armani",
+          "label": "Giorgio Armani",
+          "count": 20,
+          "checked": false
+        },
+        {
+          "value": "Armaf",
+          "label": "Armaf",
+          "count": 45,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Minimum votes",
+      "type": "radio",
+      "items": [
+        {
+          "value": "All",
+          "label": "All",
+          "count": null,
+          "checked": true
+        },
+        {
+          "value": "10+",
+          "label": "10+",
+          "count": null,
+          "checked": false
+        },
+        {
+          "value": "100+",
+          "label": "100+",
+          "count": null,
+          "checked": false
+        },
+        {
+          "value": "500+",
+          "label": "500+",
+          "count": null,
+          "checked": false
+        },
+        {
+          "value": "1000+",
+          "label": "1000+",
+          "count": null,
+          "checked": false
+        }
+      ],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Collections",
+      "type": "list",
+      "items": [
+        {
+          "value": "Inspired Expression",
+          "label": "Inspired Expression",
+          "count": 40,
+          "checked": false
+        },
+        {
+          "value": "Inspired Hybrid",
+          "label": "Inspired Hybrid",
+          "count": 26,
+          "checked": false
+        },
+        {
+          "value": "The Discontinued Collection",
+          "label": "The Discontinued Collection",
+          "count": 26,
+          "checked": false
+        },
+        {
+          "value": "Discontinued Collection",
+          "label": "Discontinued Collection",
+          "count": 19,
+          "checked": false
+        },
+        {
+          "value": "212",
+          "label": "212",
+          "count": 18,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Year",
+      "type": "range",
+      "items": [],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": "",
+      "range": {
+        "min": 1920,
+        "max": 2026,
+        "from": null,
+        "to": null
+      }
+    },
+    {
+      "title": "Notes",
+      "type": "list",
+      "items": [
+        {
+          "value": "Musk",
+          "label": "Musk",
+          "count": 6154,
+          "checked": true
+        },
+        {
+          "value": "Bergamot",
+          "label": "Bergamot",
+          "count": 6793,
+          "checked": false
+        },
+        {
+          "value": "Cedar",
+          "label": "Cedar",
+          "count": 6172,
+          "checked": false
+        },
+        {
+          "value": "Patchouli",
+          "label": "Patchouli",
+          "count": 5570,
+          "checked": false
+        },
+        {
+          "value": "Amber",
+          "label": "Amber",
+          "count": 5494,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Rating",
+      "type": "rating",
+      "items": [
+        {
+          "value": "4 & up",
+          "label": "4 & up",
+          "count": 5228,
+          "checked": false
+        },
+        {
+          "value": "3 & up",
+          "label": "3 & up",
+          "count": 5705,
+          "checked": false
+        },
+        {
+          "value": "2 & up",
+          "label": "2 & up",
+          "count": 5770,
+          "checked": false
+        },
+        {
+          "value": "1 & up",
+          "label": "1 & up",
+          "count": 5810,
+          "checked": false
+        }
+      ],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Perfumers",
+      "type": "list",
+      "items": [
+        {
+          "value": "Verônica Kato",
+          "label": "Verônica Kato",
+          "count": 56,
+          "checked": false
+        },
+        {
+          "value": "Alberto Morillas",
+          "label": "Alberto Morillas",
+          "count": 53,
+          "checked": false
+        },
+        {
+          "value": "Asad Ali Siddiki",
+          "label": "Asad Ali Siddiki",
+          "count": 38,
+          "checked": false
+        },
+        {
+          "value": "Maurizio Cerizza",
+          "label": "Maurizio Cerizza",
+          "count": 29,
+          "checked": false
+        },
+        {
+          "value": "Olivier Cresp",
+          "label": "Olivier Cresp",
+          "count": 28,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Groups",
+      "type": "list",
+      "items": [
+        {
+          "value": "Woody Aromatic",
+          "label": "Woody Aromatic",
+          "count": 882,
+          "checked": false
+        },
+        {
+          "value": "Aromatic Fougere",
+          "label": "Aromatic Fougere",
+          "count": 551,
+          "checked": false
+        },
+        {
+          "value": "Oriental Woody",
+          "label": "Oriental Woody",
+          "count": 441,
+          "checked": false
+        },
+        {
+          "value": "Woody Spicy",
+          "label": "Woody Spicy",
+          "count": 436,
+          "checked": false
+        },
+        {
+          "value": "Citrus Aromatic",
+          "label": "Citrus Aromatic",
+          "count": 377,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Countries",
+      "type": "list",
+      "items": [
+        {
+          "value": "France",
+          "label": "France",
+          "count": 1107,
+          "checked": false
+        },
+        {
+          "value": "United States",
+          "label": "United States",
+          "count": 1071,
+          "checked": false
+        },
+        {
+          "value": "Italy",
+          "label": "Italy",
+          "count": 658,
+          "checked": false
+        },
+        {
+          "value": "United Arab Emirates",
+          "label": "United Arab Emirates",
+          "count": 643,
+          "checked": false
+        },
+        {
+          "value": "Brazil",
+          "label": "Brazil",
+          "count": 513,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Specialty Designers",
+      "type": "list",
+      "items": [
+        {
+          "value": "niche",
+          "label": "Niche designer",
+          "count": 1295,
+          "checked": false
+        },
+        {
+          "value": "natural_perfumery",
+          "label": "Natural perfumery",
+          "count": 104,
+          "checked": false
+        },
+        {
+          "value": "celebrity",
+          "label": "Celebrity brand",
+          "count": 99,
+          "checked": false
+        }
+      ],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Parent company",
+      "type": "list",
+      "items": [
+        {
+          "value": "Coty",
+          "label": "Coty",
+          "count": 199,
+          "checked": false
+        },
+        {
+          "value": "Natura &Co",
+          "label": "Natura &Co",
+          "count": 172,
+          "checked": false
+        },
+        {
+          "value": "Puig",
+          "label": "Puig",
+          "count": 161,
+          "checked": false
+        },
+        {
+          "value": "Inter Parfums",
+          "label": "Inter Parfums",
+          "count": 153,
+          "checked": false
+        },
+        {
+          "value": "L'Oreal",
+          "label": "L'Oreal",
+          "count": 120,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Industries",
+      "type": "list",
+      "items": [
+        {
+          "value": "Fragrances",
+          "label": "Fragrances",
+          "count": 2778,
+          "checked": false
+        },
+        {
+          "value": "Fashion",
+          "label": "Fashion",
+          "count": 1315,
+          "checked": false
+        },
+        {
+          "value": "Cosmetics",
+          "label": "Cosmetics",
+          "count": 913,
+          "checked": false
+        },
+        {
+          "value": "Accessories",
+          "label": "Accessories",
+          "count": 184,
+          "checked": false
+        },
+        {
+          "value": "Sport Fashion",
+          "label": "Sport Fashion",
+          "count": 110,
+          "checked": false
+        }
+      ],
+      "searchable": true,
+      "canShowMore": true,
+      "showingMore": false,
+      "query": ""
+    },
+    {
+      "title": "Popularity",
+      "type": "radio",
+      "items": [
+        {
+          "value": "All",
+          "label": "All",
+          "count": null,
+          "checked": true
+        },
+        {
+          "value": "Most popular",
+          "label": "Most popular",
+          "count": null,
+          "checked": false
+        }
+      ],
+      "searchable": false,
+      "canShowMore": false,
+      "showingMore": false,
+      "query": ""
+    }
+  ],
+  "refinements": null
+}
