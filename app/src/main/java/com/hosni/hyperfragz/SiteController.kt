@@ -32,9 +32,9 @@ private const val TAG = "Vitrine"
  */
 class SiteController(private val context: Context) {
 
-    /** Last state of the search page (kept while a perfume page is loaded). */
+    /** Last state of the search page (kept while a perfume page is loaded). Set directly only by screenshot tests. */
     var state by mutableStateOf(PageState())
-        private set
+        internal set
     /** Detail screens on top of the index; empty = index. */
     val stack = mutableStateListOf<Detail>()
     var showWeb by mutableStateOf(false)

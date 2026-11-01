@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("io.github.takahirom.roborazzi")
 }
 
 // Release signing comes from keystore.properties (kept out of version control).
@@ -51,6 +52,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures { compose = true }
+    // Screenshot tests (src/test) render the Compose screens on the JVM with Robolectric.
+    testOptions.unitTests.isIncludeAndroidResources = true
+}
+
+// Golden images live next to the tests; see "Screenshot tests" in CLAUDE.md.
+roborazzi {
+    outputDir.set(file("src/test/screenshots"))
 }
 
 dependencies {
@@ -64,4 +72,13 @@ dependencies {
     implementation("androidx.webkit:webkit:1.17.1")
     implementation("io.coil-kt.coil3:coil-compose:3.6.3")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.6.3")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.17")
+    testImplementation("androidx.test.ext:junit:1.3.0")
+    testImplementation(bom)
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi:1.77.0")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi-compose:1.77.0")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
