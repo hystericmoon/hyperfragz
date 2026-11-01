@@ -723,7 +723,6 @@
     clearAll: wrap(clearAll),
     removeRefinement: wrap(removeRefinement),
     loadMore: wrap(loadMore),
-    saveScroll: saveScroll,
-    refresh: function () { lastJson = ''; schedule(); }
+    saveScroll: saveScroll
   };
 })();

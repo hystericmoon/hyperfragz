@@ -35,19 +35,12 @@ class SiteController(private val context: Context) {
     /** Last state of the search page (kept while a perfume page is loaded). */
     var state by mutableStateOf(PageState())
         private set
-    /** Kind of page currently loaded in the WebView: search | perfume | other. */
-    var page by mutableStateOf("loading")
-        private set
     /** Detail screens on top of the index; empty = index. */
     val stack = mutableStateListOf<Detail>()
     var showWeb by mutableStateOf(false)
         private set
     /** One-shot message for a snackbar (e.g. voting needs a login). */
     var message by mutableStateOf<String?>(null)
-    var canGoBack by mutableStateOf(false)
-        private set
-    var loading by mutableStateOf(true)
-        private set
 
     val favorites = Favorites(context)
 
@@ -307,7 +300,6 @@ class SiteController(private val context: Context) {
             webView.post {
                 lastReported = parsed
                 resyncIfDrifted(parsed)
-                page = parsed.page
                 // While the search page reloads (e.g. Back from a perfume) it first
                 // reports an empty state; keep the results already on screen.
                 val reloading = parsed.total == null && parsed.hitList.isEmpty() && state.hitList.isNotEmpty()
@@ -402,18 +394,12 @@ class SiteController(private val context: Context) {
             }
 
             override fun onPageStarted(view: WebView, url: String?, favicon: android.graphics.Bitmap?) {
-                loading = true
                 markNav()
                 if (!hasDocStart) view.evaluateJavascript(startScript, null)
             }
 
             override fun onPageFinished(view: WebView, url: String?) {
-                loading = false
                 if (showWeb) setHidden(false) // a page opened inside Open on Fragrantica
-            }
-
-            override fun doUpdateVisitedHistory(view: WebView, url: String?, isReload: Boolean) {
-                canGoBack = hasSiteHistory(view)
             }
 
             // Android killed (or crashed) the page process: without this the
@@ -442,8 +428,6 @@ class SiteController(private val context: Context) {
         setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, true)
         loadUrl(url)
     }
-
-    fun openHome() = webView.loadUrl(HOME_URL)
 
     /** Android 12+: where the user lets fragrantica.com links open in HyperFragz. */
     val canSetLinks = android.os.Build.VERSION.SDK_INT >= 31

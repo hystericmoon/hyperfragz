@@ -519,10 +519,8 @@
 
   window.HyperExtract = {
     hits: hits,
-    detail: function () { return JSON.stringify(detail()); },
     sortReviews: sortReviews,
-    helpful: helpful,
-    refresh: function () { report(true); }
+    helpful: helpful
   };
 
   // The full HTML (with every review) can take a while to parse, so post a

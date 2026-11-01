@@ -81,7 +81,6 @@ import java.util.Locale
 import kotlin.math.roundToInt
 
 private val PAD = 20.dp
-private val GAP_SECTION = 40.dp
 
 /** design/4 · Fragrance detail. Sections whose data is missing are left out. */
 @Composable
