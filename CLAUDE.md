@@ -90,7 +90,8 @@ try to get around that). What replaces each device check:
   `git push origin HEAD:test/filter-chips`. `.github/workflows/test-build.yml` (~3–4 min) builds the
   debug APK as versionName `X.Y.Z-test.<run number>`, signed with the release key, and publishes it
   as pre-release `test-<run number>` titled `Test build N · <commit subject>`. Only the newest 5
-  are kept. Delete the `test/` branch afterwards. (A `test-*` tag pushed from the Mac works too.)
+  are kept. The workflow deletes the `test/` branch afterwards (sessions can't delete branches),
+  so a name can be reused. (A `test-*` tag pushed from the Mac works too.)
 - The Debug app (`com.hosni.hyperfragz.debug`) checks the test channel on every launch and shows
   "Test build N is ready · Install", with the tag message under it. Release apps never see them
   (`/releases/latest` skips pre-releases).

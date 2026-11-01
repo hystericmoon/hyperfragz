@@ -83,6 +83,11 @@ jobs:
           gh release create "$tag" "$apk" --target "$GITHUB_SHA" --prerelease --latest=false \
             --title "Test build $N · $subject" --notes "$notes"
 
+      # Cloud sessions can't delete branches; the test/ branch has done its job.
+      - name: Delete the test branch
+        if: github.ref_type == 'branch'
+        run: git push origin --delete "$GITHUB_REF_NAME"
+
       - name: Keep the newest 5 test builds
         env:
           GH_TOKEN: ${{ github.token }}
