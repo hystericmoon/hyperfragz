@@ -181,6 +181,7 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Done and verified: cloud builds, screenshot tests (local + CI), test builds test-1…3 published
   and signed with the release cert, test-branch auto-delete, saved-page checks on two real pages.
 - Hosni's phone runs HyperFragz Debug from test builds (Mac-built Debug app replaced).
-  The environment setup script (tools/cloud-setup.sh) is pasted into the cloud environment.
+  Not confirmed: whether tools/cloud-setup.sh is pasted into the cloud environment's setup script.
+  If `ANDROID_HOME` is unset at the start of a session, it isn't; run it and remind Hosni.
 - Not yet exercised: release-on-merge (needs the next version bump; check the Release run and
   the published APK's cert after it), and the stricter snapshot() on the phone (test-3).
