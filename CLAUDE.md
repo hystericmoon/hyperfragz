@@ -60,6 +60,10 @@ Owner: Hosni (GitHub `hystericmoon`). Public repo: https://github.com/hystericmo
   unreleased versionName, tags `vX.Y.Z` itself and publishes with notes generated from the merged
   PRs (so PR titles and descriptions are the release notes). From the Mac, pushing an annotated tag
   `vX.Y.Z` (must equal versionName) also works; its message becomes the notes.
+  `--generate-notes` lists only PR *titles* (and every merged PR, docs ones too), not descriptions.
+  A session can merge a PR when Hosni asks: `POST …/pulls/N/ccr/ready_for_review` (drafts can't be
+  merged), then `PUT …/pulls/N/merge -f merge_method=squash`. Release assets download with
+  `gh api -H "Accept: application/octet-stream" …/releases/assets/<id>` (`gh release download` uses GraphQL).
   The workflow builds, signs with repo secrets (`KEYSTORE_BASE64`,
   `STORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) and publishes `HyperFragz-X.Y.Z.apk`
   (~3.5 min). Apps on 1.1.3+ show the Update banner on next launch.
@@ -173,16 +177,12 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Don't publish Fragrantica members' usernames or review text (e.g. in README screenshots).
 - Past suggestions (links, favourites, problem reports, CI releases) all shipped in 1.2.0.
 
-## Next up: release 1.2.1 (in progress 2026-11-01)
+## Bar colours (1.2.1)
 
-- Bar contrast (WCAG 1.4.11) done with option A: `V.Ramp` (#CFA53B → #6B6345, every step ≥3:1 on
-  ground) for the rating split, `V.BarMid` (#8C7942, 3.41 on track) for skin meters ≥12% and Best
-  worn rows 4+, `V.Olive` for minor skin buckets. `V.Dim` is gone (1.60, decorative only). Segment
-  bars carry a contentDescription listing every bucket's share. Don't reintroduce colours under 3:1
-  for data marks.
-- The same PR bumps versionCode 10 / versionName 1.2.1. After Hosni's smoke test on the test build
-  he merges it; then check the Release run published v1.2.1 and that the APK's cert is
-  `fa727de5…11ccc6` (build-tools 36.0.0 `apksigner verify --print-certs`). First real release-on-merge.
+- Data bars meet WCAG 1.4.11 (3:1): `V.Ramp` (#CFA53B → #6B6345, every step ≥3:1 on ground) for the
+  rating split, `V.BarMid` (#8C7942, 3.41 on track) for skin meters ≥12% and Best worn rows 4+,
+  `V.Olive` for minor skin buckets. Segment bars carry a contentDescription with every bucket's
+  share. Don't reintroduce colours under 3:1 for data marks.
 
 ## Status (2026-11-01)
 
@@ -194,5 +194,6 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 - Hosni's phone runs HyperFragz Debug from test builds (Mac-built Debug app replaced).
   tools/cloud-setup.sh is the cloud environment's setup script (pasted 2026-11-01). If
   `ANDROID_HOME` is unset at the start of a session, it didn't run; run it by hand and tell Hosni.
-- Not yet exercised: release-on-merge (needs the next version bump; check the Release run and
-  the published APK's cert after it), and the stricter snapshot() on the phone (test-3).
+- Release-on-merge verified with 1.2.1 (2026-11-01): Release run green, v1.2.1 published,
+  APK versionCode 10, cert `fa727de5…11ccc6`.
+- Not yet exercised: the stricter snapshot() on the phone (test-3).
