@@ -2,4 +2,6 @@
 <!-- Downloaded update APKs, shared with the system installer (Updater.kt). -->
 <paths>
     <cache-path name="updates" path="updates/" />
+    <!-- Debug builds: saved pages for testing (SiteController.sharePageForTesting). -->
+    <cache-path name="pages" path="pages/" />
 </paths>

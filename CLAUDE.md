@@ -79,6 +79,7 @@ try to get around that). What replaces each device check:
   minutes in 429 retries. If `ANDROID_HOME` is unset or the init script is missing, run
   `bash tools/cloud-setup.sh` once. First build in a fresh session: ~2–3 min; rebuilds ~15 s.
 - **UI:** screenshot tests (below). Look at the images yourself and compare with `design/`.
+- **Site scripts (`extract.js`, `bridge.js`):** saved pages (below), never the live site.
 - **On the phone:** push a test build (below); Hosni installs it from the Debug app's banner.
 - **Before a release:** Hosni does the on-device smoke test on a test build of the release commit.
 
@@ -112,6 +113,26 @@ Golden images: `app/src/test/screenshots/` (`4-detail-full.png` is one tall imag
 - Tests set `site.state` directly (`internal set`); the WebView exists but loads nothing.
   Images are null, so cards show the bottle outline. Sample reviews use made-up names and text.
 - Not covered: the WebView itself, live data, Coil images, real-device fonts/insets.
+
+## Saved pages (`tools/pages/`)
+
+When Fragrantica changes its markup, fix the scripts against saved copies of its pages:
+- Hosni saves one in the Debug app: FRAGRANTICA (or ⋮ on a perfume) → **Share page for testing**,
+  and attaches the .html to the session (or a GitHub issue). `HyperExtract.snapshot()` in
+  extract.js drops scripts, frames and ads and replaces members' names and review text.
+  Still skim a new page for names before committing it (public repo).
+- Put it in `tools/pages/saved/<name>.html` (first line `<!-- hf-url: … -->`, keep it).
+- `node tools/pages/check.cjs` runs extract.js + bridge.js on every saved page in the preinstalled
+  headless Chromium, offline (all other requests blocked), prints which sections came out
+  (✗ = empty, usually a stale selector in `X`/`SEL`) and compares with `<name>.expected.json`.
+  `--update` accepts the current output; a name argument filters pages. It also checks on every
+  run that snapshots leak no names or review text.
+- Workflow: add the broken page, run (✗ shows what broke), fix the selectors, run until the
+  sections are back, `--update`, commit page + expected JSON with the fix.
+- Limits: search pages are saved after rendering, so bridge.js can read hits, counts and panels
+  but not the live Vue/InstantSearch state (applied refinements come out null), and nothing the
+  scripts *do* (filters, sorting, loading more) can be replayed. `synthetic-perfume.html` is
+  hand-written from the selectors, only to prove the runner works.
 
 ## Testing on a device (`tools/`)
 

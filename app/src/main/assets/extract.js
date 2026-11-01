@@ -517,10 +517,45 @@
     }, 600);
   }
 
+  // ---------------------------------------------------------------- saved pages
+  // Debug builds: "Share page for testing" saves the rendered page so cloud
+  // sessions can run these scripts against it offline (tools/pages/check.cjs).
+  // Scripts, frames and ads are dropped, and members' names and review text are
+  // replaced: saved pages get committed to a public repository.
+  function snapshot() {
+    var doc = document.documentElement.cloneNode(true);
+    var drop = doc.querySelectorAll('script, noscript, iframe, link[rel="preload"], link[rel="prefetch"], link[rel="modulepreload"], #vitrine-skin, ' +
+      '[id^="fragranticacom_"], .freeStarFragrantica, [data-fuse], [data-placement-name], [id^="div-gpt"], ins.adsbygoogle');
+    for (var i = 0; i < drop.length; i++) drop[i].remove();
+    var cards = doc.querySelectorAll(X.reviewCard);
+    for (var c = 0; c < cards.length; c++) {
+      var card = cards[c], member = 'member' + (c + 1);
+      var meta = card.querySelector(X.reviewName), real = meta ? meta.getAttribute('content') : '';
+      if (meta) meta.setAttribute('content', member);
+      var prose = card.querySelector(X.reviewProse);
+      if (prose) prose.innerHTML = '<p>Review text removed from this saved page.</p>';
+      var imgs = card.querySelectorAll('img');
+      for (var m = 0; m < imgs.length; m++) { imgs[m].setAttribute('alt', member); imgs[m].removeAttribute('src'); imgs[m].removeAttribute('srcset'); }
+      if (real) replaceText(card, real, member);
+    }
+    var links = doc.querySelectorAll('a[href*="/member/"]');
+    for (var l = 0; l < links.length; l++) {
+      links[l].setAttribute('href', '/member/0');
+      if (!links[l].querySelector('*')) links[l].textContent = 'member';
+    }
+    doc.classList.remove('hf-hidden');
+    return '<!-- hf-url: ' + location.href.replace(/#.*$/, '') + ' -->\n<!DOCTYPE html>\n' + doc.outerHTML;
+  }
+  function replaceText(root, from, to) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n;
+    while ((n = walker.nextNode())) if (n.nodeValue.indexOf(from) >= 0) n.nodeValue = n.nodeValue.split(from).join(to);
+  }
+
   window.HyperExtract = {
     hits: hits,
     sortReviews: sortReviews,
-    helpful: helpful
+    helpful: helpful,
+    snapshot: snapshot
   };
 
   // The full HTML (with every review) can take a while to parse, so post a

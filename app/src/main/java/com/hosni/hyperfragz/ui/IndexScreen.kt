@@ -169,6 +169,11 @@ fun SiteMenu(expanded: Boolean, onDismiss: () -> Unit, site: SiteController) {
             onClick = { onDismiss(); site.reportProblem() },
             modifier = Modifier.heightIn(min = 48.dp),
         )
+        if (site.canSharePage) DropdownMenuItem(
+            text = { Text("Share page for testing", style = sans(15)) },
+            onClick = { onDismiss(); site.sharePageForTesting() },
+            modifier = Modifier.heightIn(min = 48.dp),
+        )
     }
 }
 

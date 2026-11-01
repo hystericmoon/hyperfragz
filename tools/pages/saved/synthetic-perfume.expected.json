@@ -1,0 +1,108 @@
+{
+  "url": "https://www.fragrantica.com/perfume/Example-House/Synthetic-Example-1.html",
+  "identity": {
+    "name": "Synthetic Example",
+    "brand": "Example House",
+    "genderLine": "for women",
+    "image": "https://fimgs.net/example.jpg"
+  },
+  "about": {
+    "family": "Amber Vanilla",
+    "audience": "women",
+    "year": "2020",
+    "createdBy": "Jane Doe"
+  },
+  "perfumers": "Jane Doe",
+  "rating": {
+    "value": 4.1,
+    "votes": 1234,
+    "breakdown": [
+      {
+        "label": "love",
+        "count": 600
+      },
+      {
+        "label": "like",
+        "count": 400
+      },
+      {
+        "label": "ok",
+        "count": 150
+      },
+      {
+        "label": "dislike",
+        "count": 60
+      },
+      {
+        "label": "hate",
+        "count": 24
+      }
+    ]
+  },
+  "accords": [
+    {
+      "label": "vanilla",
+      "width": 100
+    },
+    {
+      "label": "woody",
+      "width": 70
+    }
+  ],
+  "notes": {
+    "top": [
+      "Pear",
+      "Bergamot",
+      "Jasmine",
+      "Vanilla",
+      "Cedar"
+    ],
+    "middle": [
+      "Pear",
+      "Bergamot",
+      "Jasmine",
+      "Vanilla",
+      "Cedar"
+    ],
+    "base": [
+      "Pear",
+      "Bergamot",
+      "Jasmine",
+      "Vanilla",
+      "Cedar"
+    ]
+  },
+  "longevity": null,
+  "sillage": null,
+  "wear": [
+    {
+      "label": "winter",
+      "count": 90
+    },
+    {
+      "label": "summer",
+      "count": 10
+    },
+    {
+      "label": "night",
+      "count": 70
+    }
+  ],
+  "prosCons": null,
+  "similar": null,
+  "alsoLike": null,
+  "reviews": {
+    "total": null,
+    "sort": "newest",
+    "items": [
+      {
+        "id": "101",
+        "user": "member1",
+        "date": "Sep 14, 2026",
+        "verdict": "love",
+        "tags": [],
+        "text": "Review text removed from this saved page."
+      }
+    ]
+  }
+}
