@@ -176,12 +176,13 @@ Needs adb access to a phone or emulator, so only from a local session on Hosni's
 
 ## Status (2026-11-01)
 
-- Cloud workflow built in three stacked PRs: #1 screenshot tests + cloud setup, #2 test builds +
-  release-on-merge, #3 saved pages. Merge in that order (each targets the previous branch).
+- Cloud workflow built in PRs #1 (screenshot tests + cloud setup), #2 (test builds +
+  release-on-merge) and #3 (saved pages), merged into main 2026-11-01. The `cloud/*` branches
+  can be deleted on GitHub (sessions can't).
 - Done and verified: cloud builds, screenshot tests (local + CI), test builds test-1…3 published
   and signed with the release cert, test-branch auto-delete, saved-page checks on two real pages.
 - Hosni's phone runs HyperFragz Debug from test builds (Mac-built Debug app replaced).
-  Not confirmed: whether tools/cloud-setup.sh is pasted into the cloud environment's setup script.
-  If `ANDROID_HOME` is unset at the start of a session, it isn't; run it and remind Hosni.
+  tools/cloud-setup.sh is the cloud environment's setup script (pasted 2026-11-01). If
+  `ANDROID_HOME` is unset at the start of a session, it didn't run; run it by hand and tell Hosni.
 - Not yet exercised: release-on-merge (needs the next version bump; check the Release run and
   the published APK's cert after it), and the stricter snapshot() on the phone (test-3).
